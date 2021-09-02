@@ -8,6 +8,8 @@ class ChosenPanel extends StatefulWidget {
 class _ChosenPanelState extends State<ChosenPanel> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+        child:Text('alejaja')
+    );
   }
 }

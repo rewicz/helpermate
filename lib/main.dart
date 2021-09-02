@@ -5,6 +5,11 @@ import 'package:helpermate/pages/helperPanel.dart';
 import 'package:helpermate/pages/neederPanel.dart';
 
 void main() => runApp(MaterialApp(
+  title: 'HelepMate',
+  theme: ThemeData(
+    primaryColor: Colors.white,
+    scaffoldBackgroundColor: Colors.blueAccent,
+  ),
   initialRoute: '/',
     routes: {
       '/' : (context) => Login(),

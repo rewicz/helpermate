@@ -56,7 +56,6 @@ class TextInputBox extends StatelessWidget {
               fontWeight: FontWeight.normal,
             ),
           ),
-
           TextFormField(
             autovalidateMode: AutovalidateMode.onUserInteraction,
             onTap: onTap,
@@ -97,6 +96,8 @@ class _DataPickerBoxState extends State<DataPickerBox> {
   DateTime currentDate = DateTime.now();
   String text;
   ValueSetter<DateTime> callback;
+  bool wybranaData = false;
+  final TextEditingController _textController = new TextEditingController(text: 'RRRR-MM-DD');
 
 
   _DataPickerBoxState({
@@ -112,7 +113,8 @@ class _DataPickerBoxState extends State<DataPickerBox> {
         lastDate: DateTime(2050));
     if (pickedDate != null && pickedDate != currentDate)
       setState(() {
-        currentDate = pickedDate;
+        wybranaData = true;
+        _textController.text = pickedDate.toString().substring(0, 11);
         callback(currentDate);
       });
   }
@@ -132,29 +134,20 @@ class _DataPickerBoxState extends State<DataPickerBox> {
               fontWeight: FontWeight.normal,
             ),
           ),
-          Row(
-            children: [
-              Text(
-                currentDate.toString().substring(0, 11),
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.normal,
-                ),
+          TextFormField(
+            controller: _textController,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            onTap: () {_selectDate(context);},
+            decoration: InputDecoration(
+              focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white)
               ),
-              SizedBox(width: 10.0),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: FlatButton(
-                  color: Colors.indigo,
-                  onPressed: () => _selectDate(context),
-                  child: Text(
-                    "Pick Data",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              )
-            ],
+              focusColor: Colors.amberAccent,
+              prefixIcon: Icon(
+                Icons.date_range,
+                color: Colors.white,
+              ),
+            ),
           )
         ],
       ),

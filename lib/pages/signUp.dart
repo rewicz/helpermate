@@ -87,7 +87,7 @@ class _SignUpState extends State<SignUp> {
           padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 100.0),
           child: Column(
             children: [
-              TitleBox(title: "Sign up"),
+              TitleBox(title: "REGISTER"),
               TextInputBox(
                 hint: 'Enter your Full Name',
                 text: 'Full Name',

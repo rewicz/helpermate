@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:helpermate/pages/home.dart';
 import 'package:helpermate/pages/login.dart';
 import 'package:helpermate/pages/chosenPanel.dart';
 import 'package:helpermate/pages/helperPanel.dart';
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
       themeMode: EasyDynamicTheme.of(context).themeMode,
       initialRoute: '/',
       routes: {
-        '/': (context) => MyHomePage(),
+        '/': (context) => ChosenPanel(),
         '/signUp': (context) => SignUp(),
         '/chosen': (context) => ChosenPanel(),
         '/helper': (context) => HelperPanel(),

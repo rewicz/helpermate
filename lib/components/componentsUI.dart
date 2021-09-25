@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:helpermate/utilities/constants.dart';
 
 class TitleBox extends StatelessWidget {
   final String title;
@@ -10,7 +12,7 @@ class TitleBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Sign In',
+      title,
       style: TextStyle(
         color: Colors.white,
         fontSize: 30.0,
@@ -181,3 +183,26 @@ class RoitButton extends StatelessWidget {
 
   }
 }
+
+class Rating extends StatelessWidget {
+  int rate;
+  int numberOfrate;
+
+  Rating({
+    required this.rate,
+    required this.numberOfrate
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text("Rating: "),
+
+        //Text(" ($numberOfrate) ")
+
+      ],
+    );
+  }
+}
+

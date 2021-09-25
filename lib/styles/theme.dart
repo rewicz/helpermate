@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
 var lightThemeData = new ThemeData(
+    backgroundColor: Color(0xff15C7F4),
+    buttonColor: Colors.indigoAccent,
     primaryColor: Colors.blue,
-    toggleableActiveColor: Colors.blue,
-    textTheme: new TextTheme(button: TextStyle(color: Colors.white70)),
+    //textTheme: new TextTheme(button: TextStyle(color: Colors.white70)),
     brightness: Brightness.light,
-    accentColor: Colors.blue);
+    accentColor: Colors.white
+);
 
 var darkThemeData = ThemeData(
-    primaryColor: Colors.blue,
-    toggleableActiveColor: Colors.black,
-    textTheme: new TextTheme(button: TextStyle(color: Colors.black54)),
+    backgroundColor: Colors.black,
+    buttonColor: Colors.yellow, //działa
+    primaryColor: Colors.black, // appbar
+    toggleableActiveColor: Colors.yellow, //switch
     brightness: Brightness.dark,
-    accentColor: Colors.blue);
+    accentColor: Colors.black,
+
+);

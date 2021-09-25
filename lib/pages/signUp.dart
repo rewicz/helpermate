@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:helpermate/components/componentsUI.dart';
@@ -82,54 +83,72 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 100.0),
-          child: Column(
-            children: [
-              TitleBox(title: "REGISTER"),
-              TextInputBox(
-                hint: 'Enter your Full Name',
-                text: 'Full Name',
-                callback: (String value) {fullName = value;},
-                icon: Icon(
-                  Icons.account_circle,
-                  color: Colors.white,
+      appBar: AppBar(
+        actions: [EasyDynamicThemeSwitch()],
+      ),
+      body: Container(
+        color: Theme.of(context).backgroundColor,
+        width: double.infinity,
+        height: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            TitleBox(title: "Sign up"),
+            TextInputBox(
+              hint: 'Enter your Full Name',
+              text: 'Full Name',
+              callback: (String value) {fullName = value;},
+              icon: Icon(
+                Icons.account_circle,
+                color: Colors.white,
+              ),
+            ),
+            TextInputBox(
+              hint: 'Enter your email',
+              text: 'Email',
+              callback: (String value) {email = value;},
+              icon: Icon(
+                Icons.email,
+                color: Colors.white,
+              ),
+            ),
+            DataPickerBox(
+              text: 'Date of birth',
+              callback: (DateTime value) {
+                dateOdBirth = value;
+              },
+            ),
+            _image != null ?
+            ClipOval(child: Image.file(_image!,width: 150,height: 150, fit: BoxFit.cover)) :
+            ClipOval(child:
+            new Container(
+              width: 150.0,
+              height: 150.0,
+              decoration: new BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+              ),
+            ),
+            ),
+            Container(
+              width: 100.0,
+              height: 50.0,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Theme.of(context).buttonColor,
+                  ),
+                  onPressed: () => {showChoiceDialog(context)},
+                  child: Text(
+                    "Pick photo",
+                    style: TextStyle(color: Theme.of(context).accentColor),
+                  ),
                 ),
               ),
-              TextInputBox(
-                hint: 'Enter your email',
-                text: 'Email',
-                callback: (String value) {email = value;},
-                icon: Icon(
-                  Icons.email,
-                  color: Colors.white,
-                ),
-              ),
-              DataPickerBox(
-                text: 'Date of birth',
-                callback: (DateTime value) {
-                  dateOdBirth = value;
-                },
-              ),
-              _image != null ?
-              ClipOval(child: Image.file(_image!,width: 300,height: 300, fit: BoxFit.cover)) :
-              ClipOval(child: new Container(
-                width: 300.0,
-                height: 300.0,
-                decoration: new BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                ),
-              )),
-              RaisedButton(
-                  child: Text('Pick photo'),
-                  onPressed: () {
-                      showChoiceDialog(context);
-                    },
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       )
     );

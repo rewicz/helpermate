@@ -22,6 +22,7 @@ class _LoginState extends State<Login> {
         actions: [EasyDynamicThemeSwitch()],
       ),
       body: Container(
+        color: Theme.of(context).backgroundColor,
         width: double.infinity,
         height: double.infinity,
         child: Form(
@@ -30,7 +31,6 @@ class _LoginState extends State<Login> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              EasyDynamicThemeSwitch(),
               TitleBox(title: 'Sign in'),
               TextInputBox(
                 hint: "Enter your email",
@@ -70,12 +70,14 @@ class _LoginState extends State<Login> {
                 height: 50.0,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(50),
-                  child: FlatButton(
-                    color: Colors.indigo,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Theme.of(context).buttonColor,
+                    ),
                     onPressed: () => {submitPassword()},
                     child: Text(
                       "SUBMIT",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Theme.of(context).accentColor),
                     ),
                   ),
                 ),

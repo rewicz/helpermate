@@ -41,12 +41,8 @@ class _LoginState extends State<Login> {
                 text: 'Email',
                 callback: (String value) {email = value;},
                 validatorMethod: (value) {
-                  if(value!.isEmpty || value.length > 5) {
-                    return 'bad email';
-                  } else {
-                    return null;
-                  }
-              }
+                  //nothing
+                }
               ),
               TextInputBox(
                 hint: "Password",
@@ -58,10 +54,8 @@ class _LoginState extends State<Login> {
                 callback: (String value) {password = value;},
                  // ignore: non_constant_identifier_names
                 validatorMethod: (value) {
-                  if(value!.isEmpty || value.length > 5) {
-                    return 'bad email';
-                  } else {
-                    return null;
+                  if(value != null) {
+                    //nothing
                   }
                 },
               ),

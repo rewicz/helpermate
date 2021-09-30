@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       themeMode: EasyDynamicTheme.of(context).themeMode,
       initialRoute: '/',
       routes: {
-        '/': (context) => ChosenPanel(),
+        '/': (context) => Login(),
         '/signUp': (context) => SignUp(),
         '/chosen': (context) => ChosenPanel(),
         '/helper': (context) => HelperPanel(),

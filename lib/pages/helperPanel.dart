@@ -1,6 +1,10 @@
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:helpermate/components/helper/profile.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:helpermate/components/helper/availiabilityHelperPanel.dart';
+import 'package:helpermate/components/helper/helpingPlanHelperPanel.dart';
+import 'package:helpermate/components/helper/offeredHelpHelperPanel.dart';
+import 'package:helpermate/components/helper/profileHelperPanel.dart';
 
 class HelperPanel extends StatefulWidget {
   const HelperPanel({Key? key}) : super(key: key);
@@ -15,19 +19,15 @@ class HelperPanelState extends State<HelperPanel> {
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
+    HelpingPlanHelperPanel(
+      id: 5,
     ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
+    AvailiabilityHelperPanel(
+
     ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
+    OfferedHelpHelperPanel(
     ),
-    ProfilePanel(
+    ProfileHelperPanel(
 
     ),
   ];
@@ -41,8 +41,9 @@ class HelperPanelState extends State<HelperPanel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
+        title: const Text('Helper'),
         actions: [EasyDynamicThemeAutoSwitch()],
       ),
       body: Center(
@@ -78,3 +79,4 @@ class HelperPanelState extends State<HelperPanel> {
     );
   }
 }
+

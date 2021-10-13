@@ -43,19 +43,19 @@ class _SignUpState extends State<SignUp> {
   Future<void> showChoiceDialog(BuildContext context) {
     return showDialog(context: context, builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Make a choice'),
+        title: Text('Wybierz skąd chcesz wybrać zdjęcie'),
         content: SingleChildScrollView(
           child: ListBody(
             children: [
               GestureDetector(
-                child: Text('Gallery'),
+                child: Text('Galeria'),
                 onTap: () {
                   _openGalery(context);
                 },
               ),
               SizedBox(height: 10.0,),
               GestureDetector(
-                child: Text('Camera'),
+                child: Text('Kamera'),
                 onTap: () {
                   _openCamera(context);
                 },
@@ -72,7 +72,7 @@ class _SignUpState extends State<SignUp> {
     if(_image != null) {
       return Image.file(_image!, width: 400,height: 400);
     } else {
-      return Text('Please enter photo');
+      return Text('Wczytaj zdjęcie');
     }
   }
 
@@ -100,21 +100,26 @@ class _SignUpState extends State<SignUp> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: 20.0),
-              TitleBox(title: "Sign up"),
+              TitleBox(title: "Rejestracja"),
               SizedBox(height: 20.0),
               TextInputBox(
-                hint: 'Enter your Full Name',
-                text: 'Full Name',
+                hint: 'Wpisz imię i nazwisko',
+                text: 'Imię i nazwisko',
                 callback: (String value) {fullName = value;},
                 icon: Icon(
                   Icons.account_circle,
                   color: Colors.white,
                 ),
                   validatorMethod: (value) {
-                    if(value!.contains(' ')) {
-                      return null;
+                    RegExp regExp = new RegExp(r'^[a-z A-Z,.\-]+$');
+                    if (value!.length == 0) {
+                      return 'Proszę wpisać imię i nazwisko';
+                    } else if (!regExp.hasMatch(fullName)) {
+                      return 'Nie używaj znaków specjalnych';
+                    } else if(!value.contains(" ") || value.indexOf(" ") == value.length-1) {
+                      return 'Imię i nazwisko musi być oddzielone spacją';
                     } else {
-                      return 'Please enter name and surname';
+                      return null;
                     }
                   }
               ),
@@ -129,16 +134,16 @@ class _SignUpState extends State<SignUp> {
                 ),
                 validatorMethod: (value) {
                   if(value!.contains(new RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))){
-                    return null;
+                    return 'Email musi być w formie \'test@test.pl\' ';
                   } else {
-                    return "Wrong email!";
+                    return null;
                   }
                 },
               ),
               SizedBox(height: 20.0),
               TextInputBox(
-                hint: 'Enter your password',
-                text: 'Password',
+                hint: 'Wpisz hasło',
+                text: 'Hasło',
                 callback: (String value) {password = value;},
                 icon: Icon(
                   Icons.lock,
@@ -148,13 +153,13 @@ class _SignUpState extends State<SignUp> {
                   if(value!.contains(new RegExp(r'^[a-z0-9_-]{4,8}$'))){
                     return null;
                   } else {
-                    return "Wrong password!";
+                    return "Hasło musi zawierać conajmniej jedną literę oraz cyfrę!";
                   }
                 },
               ),
               SizedBox(height: 20.0),
               DataPickerBox(
-                text: 'Date of birth',
+                text: 'Data urodzenia',
                 callback: (DateTime value) {
                   dateOdBirth = value;
                 },
@@ -186,7 +191,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                     onPressed: () => {showChoiceDialog(context)},
                     child: Text(
-                      "Pick photo",
+                      "Wybierz zdjęcie",
                       style: TextStyle(color: Theme.of(context).accentColor),
                     ),
                   ),

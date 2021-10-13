@@ -38,7 +38,7 @@ class _NeederPanelState extends State<NeederPanel> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.health_and_safety),
-            label: 'Helping plan',
+            label: 'Plan pomocy',
             backgroundColor: Colors.red,
           ),
           BottomNavigationBarItem(

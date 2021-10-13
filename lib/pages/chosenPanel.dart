@@ -35,7 +35,7 @@ class _ChosenPanelState extends State<ChosenPanel> {
                   Navigator.pushNamed(context, '/helper')
                 },
                 child: Text(
-                  "Helper",
+                  "Chętny do pomocy",
                   style: TextStyle(color: Theme.of(context).accentColor),
                 ),
               ),
@@ -54,7 +54,7 @@ class _ChosenPanelState extends State<ChosenPanel> {
                   Navigator.pushNamed(context, '/needer')
                 },
                 child: Text(
-                  "Needer",
+                  "Potrzebujący",
                   style: TextStyle(color: Theme.of(context).accentColor),
                 ),
               ),

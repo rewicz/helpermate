@@ -1,6 +1,5 @@
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:helpermate/components/helper/availiabilityHelperPanel.dart';
 import 'package:helpermate/components/helper/helpingPlanHelperPanel.dart';
 import 'package:helpermate/components/helper/offeredHelpHelperPanel.dart';
@@ -43,7 +42,7 @@ class HelperPanelState extends State<HelperPanel> {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: const Text('Helper'),
+        title: const Text('Chętny do pomocy'),
         actions: [EasyDynamicThemeAutoSwitch()],
       ),
       body: Center(
@@ -53,22 +52,22 @@ class HelperPanelState extends State<HelperPanel> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.health_and_safety),
-            label: 'Helping plan',
+            label: 'Plan pomocy',
             backgroundColor: Colors.red,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.date_range),
-            label: 'Availability',
+            label: 'Dostępność',
             backgroundColor: Colors.green,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.record_voice_over_outlined),
-            label: 'Offered help',
+            label: 'Zaoferuj pomoc',
             backgroundColor: Colors.purple,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Profile',
+            label: 'Profil',
             backgroundColor: Colors.pink,
           ),
         ],

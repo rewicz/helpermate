@@ -44,7 +44,7 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           children: [
             Text(
-              "Edit Profile",
+              editMode?"Edycja profilu":"Profil",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
             ),
             SizedBox(
@@ -110,7 +110,7 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
               icon: Icon(
                 Icons.person,
               ),
-              text: "Full name",
+              text: "Imię i nazwisko",
               callback: (String value) {  },
             ),
             TextInputBox(
@@ -122,10 +122,19 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
               text: "Email",
               callback: (String value) {  },
             ),
+            TextInputBox(
+              readonly: !editMode,
+              labelText: "50123123123",
+              icon: Icon(
+                Icons.phone,
+              ),
+              text: "Numer telefonu",
+              callback: (String value) {  },
+            ),
             PasswordLabelBox(
                 readonly: !editMode,
                 labelText: "1234",
-                text: "Password",
+                text: "Hasło",
             ),
             DataPickerBox(
               text: 'Date of birth',
@@ -135,22 +144,21 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
             ),
 
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                DropDownBox(
-                  items: ['Gliwice','Zabrze','Gdansk'],
-                  initValue: 'Gliwice',
-                  callback: (String value) {
-                    city = value;
-                  },
+                Expanded(
+                  child: TextInputBox(
+                    readonly: !editMode,
+                    labelText: "Gliwice Zamenhoffa 10 / 10",
+                    icon: Icon(Icons.home),
+                    callback: (String value) {  },
+                    text: 'Adres zamieszkania',
+                  ),
                 ),
-                DropDownBox(
-                  items: ['Slask','Pomorze','Lubuskie'],
-                  initValue: 'Slask',
-                  callback: (String value) {
-                    province = value;
-                  },
-                )]
+                Visibility(
+                  visible: editMode,
+                    child: RoitButton(text: "Edytuj", onPressedCallback: () {})
+                ),
+              ],
             ),
             SizedBox(
               height: 35,

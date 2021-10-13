@@ -31,9 +31,9 @@ class _LoginState extends State<Login> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              TitleBox(title: 'Sign in'),
+              TitleBox(title: 'Zaloguj'),
               TextInputBox(
-                hint: "Enter your email",
+                hint: "Wpisz email",
                 icon:  Icon(
                   Icons.email,
                   color: Colors.white,
@@ -45,12 +45,12 @@ class _LoginState extends State<Login> {
                 }
               ),
               TextInputBox(
-                hint: "Password",
+                hint: "Wpisz hasło",
                 icon:  Icon(
                   Icons.lock,
                   color: Colors.white,
                 ),
-                text: 'Enter your password',
+                text: 'Hasło',
                 callback: (String value) {password = value;},
                  // ignore: non_constant_identifier_names
                 validatorMethod: (value) {
@@ -70,7 +70,7 @@ class _LoginState extends State<Login> {
                     ),
                     onPressed: () => {submitPassword()},
                     child: Text(
-                      "SUBMIT",
+                      "ZALOGUJ",
                       style: TextStyle(color: Theme.of(context).accentColor),
                     ),
                   ),
@@ -82,13 +82,13 @@ class _LoginState extends State<Login> {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                            text: 'Dont have account?  ',
+                            text: 'Nie masz konta?  ',
                             style: TextStyle(
                               color: Colors.white,
                             ),
                         ),
                         TextSpan(
-                            text: 'SIGN UP',
+                            text: 'Zarejestruj się',
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold

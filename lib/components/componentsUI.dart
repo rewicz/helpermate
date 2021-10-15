@@ -56,7 +56,7 @@ class TextInputBox extends StatelessWidget {
           Text(
             text,
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontSize: 20.0,
               fontWeight: FontWeight.normal,
             ),

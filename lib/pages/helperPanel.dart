@@ -19,7 +19,6 @@ class HelperPanelState extends State<HelperPanel> {
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
     HelpingPlanHelperPanel(
-      id: 5,
     ),
     AvailiabilityHelperPanel(
 

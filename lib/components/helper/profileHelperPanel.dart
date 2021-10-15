@@ -1,4 +1,5 @@
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:helpermate/components/componentsUI.dart';
 
@@ -10,19 +11,15 @@ class ProfileHelperPanel extends StatefulWidget {
 class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
   late String userName;
   late String helpArea;
-  late String city;
+  late String city; //todo do poprawy
+  late String street;
+  late String houseNB;
+  late String apartNB;
   late String province;
   late double rate ;
   late int numberOfrate;
   late bool editMode;
-  late DateTime dateOdBirth;
-
-
-  @override
-  void setState(VoidCallback fn) {
-    print(editMode);
-    super.setState(fn);
-  }
+  late String dateOfBirth;
 
   @override
   void initState() {
@@ -30,7 +27,79 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
     rate = 5;
     numberOfrate = 20;
     editMode = false;
+    dateOfBirth = "2001-11-22";
+    city='Gliwice';
+    street='Paderewskiego';
+    houseNB='10';
+    apartNB='1';
     super.initState();
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime(int.parse(dateOfBirth.substring(0, 4))),
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2050));
+    if (pickedDate != null)
+      setState(() {
+        dateOfBirth = pickedDate.toString().substring(0, 11);
+      });
+  }
+
+  Future<void> showChoiceDialog(BuildContext context) {
+    String cityDialog = city;
+    String streetDialog = street;
+    String houseNBDialog = houseNB;
+    String apartNBDialog = apartNB;
+
+    return showDialog(context: context, builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Wpisz adres'),
+        content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                TextInputBox(
+                    icon: Icon(Icons.home),
+                    callback: (value) {cityDialog = value;},
+                    text: 'Miejscowość'),
+                TextInputBox(
+                    icon: Icon(Icons.home),
+                    callback: (value) {streetDialog = value;},
+                    text: 'Ulica'),
+                TextInputBox(
+                    icon: Icon(Icons.home),
+                    callback: (value) {houseNBDialog = value;},
+                    text: 'Numer domu'),
+                TextInputBox(
+                    icon: Icon(Icons.home),
+                    callback: (value) {apartNBDialog = value;},
+                    text: 'Numer mieszkania (opcjonalnie)'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    RoitButton(text: 'SAVE',
+                        onPressedCallback: () {
+                          this.setState(() {
+                            city = cityDialog;
+                            street = streetDialog;
+                            houseNB = houseNBDialog;
+                            apartNB = apartNBDialog;
+                          });
+                          Navigator.of(context).pop();
+                        }),
+                    RoitButton(text: 'CANCEL', onPressedCallback: () {
+                      Navigator.of(context).pop();
+                    }),
+                  ],
+                )
+
+              ],
+            )
+
+        ),
+      );
+    });
   }
 
   @override
@@ -132,23 +201,33 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
               callback: (String value) {  },
             ),
             PasswordLabelBox(
-                readonly: !editMode,
-                labelText: "1234",
-                text: "Hasło",
+              readonly: !editMode,
+              labelText: "1234",
+              text: "Hasło",
             ),
-            DataPickerBox(
-              text: 'Date of birth',
-              callback: (DateTime value) {
-                dateOdBirth = value;
-              },
-            ),
-
             Row(
               children: [
                 Expanded(
                   child: TextInputBox(
                     readonly: !editMode,
-                    labelText: "Gliwice Zamenhoffa 10 / 10",
+                    labelText: dateOfBirth,
+                    icon: Icon(Icons.date_range),
+                    callback: (String value) { dateOfBirth = value; },
+                    text: 'Data urodzenia',
+                  ),
+                ),
+                Visibility(
+                    visible: editMode,
+                    child: RoitButton(text: "Edytuj", onPressedCallback: () {_selectDate(context);})
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextInputBox(
+                    readonly: !editMode,
+                    labelText: '$city $street $houseNB/$apartNB',
                     icon: Icon(Icons.home),
                     callback: (String value) {  },
                     text: 'Adres zamieszkania',
@@ -156,7 +235,9 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
                 ),
                 Visibility(
                   visible: editMode,
-                    child: RoitButton(text: "Edytuj", onPressedCallback: () {})
+                    child: RoitButton(text: "Edytuj", onPressedCallback: () {
+                      showChoiceDialog(context);
+                    })
                 ),
               ],
             ),

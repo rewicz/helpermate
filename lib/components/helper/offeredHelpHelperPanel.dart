@@ -11,15 +11,10 @@ class OfferedHelpHelperPanel extends StatefulWidget {
 class _OfferedHelpHelperPanelState extends State<OfferedHelpHelperPanel> {
 
 
-  List<HelpingPlanHelperData> helpingList = <HelpingPlanHelperData> [
-    HelpingPlanHelperData(iDHelper: 1, iDNeeder: 2, nameHelper: "Adam", nameNeeder: "Robert", helpingTime: DateTime(2020), helpingKind: "Dog"),
-    HelpingPlanHelperData(iDHelper: 1, iDNeeder: 3, nameHelper: "Adam", nameNeeder: "Monika", helpingTime: DateTime(2020), helpingKind: "Trash"),
-    HelpingPlanHelperData(iDHelper: 1, iDNeeder: 4, nameHelper: "Adam", nameNeeder: "Klaudia", helpingTime: DateTime(2020), helpingKind: "Dog"),
-    HelpingPlanHelperData(iDHelper: 1, iDNeeder: 4, nameHelper: "Adam", nameNeeder: "Konrad", helpingTime: DateTime(2020), helpingKind: "Trash"),
-    HelpingPlanHelperData(iDHelper: 1, iDNeeder: 6, nameHelper: "Adam", nameNeeder: "Henryk", helpingTime: DateTime(2020), helpingKind: "Trash")
+  List<HelpObject> helpingList = <HelpObject> [
   ];
 
-  late List<HelpingPlanHelperData> filterList;
+  late List<HelpObject> filterList;
 
   late String filterNameNeeder = 'All';
   late String filterHelpingKindNeeder = 'All';
@@ -33,7 +28,6 @@ class _OfferedHelpHelperPanelState extends State<OfferedHelpHelperPanel> {
   @override
   void setState(VoidCallback fn) {
     if(filterNameNeeder!='All'){
-      filterList = filterList.where((element) => element.nameNeeder == filterNameNeeder).toList();
       print(filterNameNeeder);
     }
     if(filterHelpingKindNeeder!='All'){
@@ -84,7 +78,7 @@ class _OfferedHelpHelperPanelState extends State<OfferedHelpHelperPanel> {
           itemBuilder: (context, index){
             return Card(
               child: ListTile(
-                title: Text(filterList[index].nameHelper + "  " + helpingList[index].nameNeeder + " " +  helpingList[index].helpingKind)  ,
+                title: Text("")  ,
               ),
 
             );

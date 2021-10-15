@@ -16,12 +16,7 @@ class _HelpingPlanNeederPanelState extends State<HelpingPlanNeederPanel> {
 
   _HelpingPlanNeederPanelState({required this.id});
 
-  List<HelpingPlanHelperData> helpingList = <HelpingPlanHelperData> [
-    HelpingPlanHelperData(iDHelper: 1, iDNeeder: 2, nameHelper: "Adam", nameNeeder: "Robert", helpingTime: DateTime(2020), helpingKind: "Dog"),
-    HelpingPlanHelperData(iDHelper: 1, iDNeeder: 3, nameHelper: "Adam", nameNeeder: "Monika", helpingTime: DateTime(2020), helpingKind: "Dog"),
-    HelpingPlanHelperData(iDHelper: 1, iDNeeder: 4, nameHelper: "Adam", nameNeeder: "Klaudia", helpingTime: DateTime(2020), helpingKind: "Dog"),
-    HelpingPlanHelperData(iDHelper: 1, iDNeeder: 4, nameHelper: "Adam", nameNeeder: "Klaudia", helpingTime: DateTime(2020), helpingKind: "Dog"),
-    HelpingPlanHelperData(iDHelper: 1, iDNeeder: 6, nameHelper: "Adam", nameNeeder: "Henryk", helpingTime: DateTime(2020), helpingKind: "Dog")
+  List<HelpObject> helpingList = <HelpObject> [
   ];
 
   @override
@@ -53,7 +48,7 @@ class _HelpingPlanNeederPanelState extends State<HelpingPlanNeederPanel> {
                   leading: CircleAvatar(
                     backgroundColor: Colors.red,
                   ),
-                  title: Text(helpingList[index].nameHelper + "  " + helpingList[index].nameNeeder),
+                  title: Text("as"),
 
                 ),
 

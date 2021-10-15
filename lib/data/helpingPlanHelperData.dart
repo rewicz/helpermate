@@ -1,19 +1,18 @@
-class HelpingPlanHelperData {
-  int iDHelper; // id pomocnika
-  int iDNeeder; // id potrzebującego
+import 'helper.dart';
+import 'needer.dart';
 
-  String nameHelper; // imie pomocnika
-  String nameNeeder; // imie potrzebującego
+class HelpObject {
+
+  Needer needer;
+  Helper helper;
 
   DateTime helpingTime; // data pomocy
 
   String helpingKind;// jaką pomoc jest udzielana
 
-  HelpingPlanHelperData({
-      required this.iDHelper,
-      required this.iDNeeder,
-      required this.nameHelper,
-      required this.nameNeeder,
+  HelpObject({
+      required this.needer,
+      required this.helper,
       required this.helpingTime,
       required this.helpingKind
   });

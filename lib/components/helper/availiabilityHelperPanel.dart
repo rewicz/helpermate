@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:helpermate/components/componentsUI.dart';
+import 'package:range_slider_dialog/range_slider_dialog.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 
@@ -13,7 +15,7 @@ class _AvailiabilityHelperPanelState extends State<AvailiabilityHelperPanel> {
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
 
-  TextEditingController _eventController = TextEditingController();
+  var _rangeValues = RangeValues(9.00 , 15.00); // zakres slidera do dodania dostępności
 
   @override
   void initState() {
@@ -26,17 +28,17 @@ class _AvailiabilityHelperPanelState extends State<AvailiabilityHelperPanel> {
   }
 
   @override
-  void dispose() {
-    _eventController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Column(
         children: [
           TableCalendar(
+            availableCalendarFormats: const {
+              CalendarFormat.month: 'Miesiąc',
+              CalendarFormat.twoWeeks: '2 tygodnie',
+              CalendarFormat.week: '1 tydzien',
+            },
             focusedDay: selectedDay,
             firstDay: DateTime(1990),
             lastDay: DateTime(2050),
@@ -55,7 +57,6 @@ class _AvailiabilityHelperPanelState extends State<AvailiabilityHelperPanel> {
                 selectedDay = selectDay;
                 focusedDay = focusDay;
               });
-              print(focusedDay);
             },
             selectedDayPredicate: (DateTime date) {
               return isSameDay(selectedDay, date);
@@ -99,64 +100,91 @@ class _AvailiabilityHelperPanelState extends State<AvailiabilityHelperPanel> {
               ),
             ),
           ),
-          ..._getEventsfromDay(selectedDay).map(
-                (Event event) => ListTile(
-              title: Text(
-                'Hour: ' + event.title,
+          ..._getEventsfromDay(selectedDay).map((Event event) => Card(
+                child: Text(
+                  event.toString(),
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
+                ),
               ),
-            ),
-          ),
+            )
+
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text("Add availability"),
-            content: TextFormField(
-              controller: _eventController,
-            ),
-            actions: [
-              TextButton(
-                child: Text("Cancel"),
-                onPressed: () => Navigator.pop(context),
-              ),
-              TextButton(
-                child: Text("Ok"),
-                onPressed: () {
-                  if (_eventController.text.isEmpty) {
-
+        onPressed: () => (showRangeSliderDialog(context, this._rangeValues, (currentValue) {
+          bool isGood = true;
+          if (currentValue != null) {
+              if (selectedEvents[selectedDay] != null) {
+                selectedEvents[selectedDay]!.asMap().forEach((key, savedValues) {
+                  //sprytne sprwadzenie czy data co wpisaliśmy jest dobra
+                  if (savedValues.end <= currentValue.start.toInt()) {
+                    print("now start");
+                  } else if (savedValues.start >= currentValue.end.toInt()) {
+                    print("now end");
                   } else {
-                    if (selectedEvents[selectedDay] != null) {
-                      selectedEvents[selectedDay]!.add(
-                        Event(title: _eventController.text),
-                      );
-                    } else {
-                      selectedEvents[selectedDay] = [
-                        Event(title: _eventController.text)
-                      ];
-                    }
-
+                    isGood = false;
                   }
+                });
+                if(isGood) {
+                  selectedEvents[selectedDay]!.add(
+                    Event(start: currentValue.start.toInt(), end: currentValue.end.toInt()),
+                  );
                   Navigator.pop(context);
-                  _eventController.clear();
-                  setState((){});
-                  return;
-                },
-              ),
-            ],
-          ),
-        ),
-        label: Text("Add Event"),
+                  setState(() {});
+                } else {
+                  showDialog(context: context, builder: (BuildContext context) {
+                    return AlertDialog(
+                        title: Text(
+                            'Wybrane przez ciebie godziny pokrywają się z poprzednim wyborem. Popraw godziny dostępnosci'),
+                        content: SingleChildScrollView(
+                            child: RoitButton(text: 'OK',
+                              onPressedCallback: () => Navigator.pop(context),)
+                        )
+                    );
+                  });
+                }
+              } else {
+                selectedEvents[selectedDay] = [
+                  Event(start: currentValue.start.toInt(), end: currentValue.end.toInt())
+                ];
+                Navigator.pop(context);
+                setState(() {});
+              }
+            }
+        })),
+        label: Text("Dodaj godziny"),
         icon: Icon(Icons.add),
       ),
     );
   }
+
+  void showRangeSliderDialog(BuildContext context,
+      RangeValues? defaultValue, Function(RangeValues?) callback) async {
+    await RangeSliderDialog.display<double>(context,
+        minValue: 0,
+        maxValue: 24,
+        acceptButtonText: 'Akceptuj',
+        cancelButtonText: 'Anuluj',
+        headerText: 'Podaj godziny swojej dostępności',
+        selectedRangeValues: defaultValue, onApplyButtonClick: (value) {
+          callback(value);
+        });
+  }
 }
 
 class Event {
-  final String title;
-  Event({required this.title});
+   int start;
+   int end;
+  
+  Event({
+    required this.start,
+    required this.end,
+  });
 
-  String toString() => this.title;
+   @override
+  String toString() {
+    return 'Godziny od $start do $end';
+  }
 }

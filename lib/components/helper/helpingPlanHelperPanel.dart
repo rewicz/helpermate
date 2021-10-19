@@ -32,7 +32,6 @@ class _HelpingPlanHelperPanelState extends State<HelpingPlanHelperPanel> {
               return Card(
                 child: ListTile(
                   onTap: () {
-                    print('sad');
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (_) => NeederCardScreen(helpObject: helpingList[index]))
                     );

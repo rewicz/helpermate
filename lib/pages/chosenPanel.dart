@@ -12,7 +12,7 @@ class _ChosenPanelState extends State<ChosenPanel> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-        actions: [EasyDynamicThemeAutoSwitch()],
+        actions: [EasyDynamicThemeSwitch()],
     ),
     body: Container(
       color: Theme.of(context).backgroundColor,

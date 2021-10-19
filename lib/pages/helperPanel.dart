@@ -42,7 +42,7 @@ class HelperPanelState extends State<HelperPanel> {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: const Text('Chętny do pomocy'),
-        actions: [EasyDynamicThemeAutoSwitch()],
+        actions: [EasyDynamicThemeSwitch()],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),

@@ -29,7 +29,7 @@ class _NeederPanelState extends State<NeederPanel> {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: const Text('Helper'),
-        actions: [EasyDynamicThemeAutoSwitch()],
+        actions: [EasyDynamicThemeSwitch()],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),

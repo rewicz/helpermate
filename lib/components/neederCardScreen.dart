@@ -7,6 +7,7 @@ class NeederCardScreen extends StatefulWidget {
   HelpObject helpObject;
   bool vote = false;
   bool isEnd = false;
+  bool isAccept = true;
 
   NeederCardScreen({required this.helpObject});
 
@@ -108,10 +109,20 @@ class _NeederCardScreenState extends State<NeederCardScreen> {
                 ),
               ],
             ),
-          ),git
-          RoitButton(
-            text: 'ODWOŁAJ',
-            onPressedCallback: () => cancelHelp()
+          ),
+          Visibility(
+            child: RoitButton(
+                text: 'ODWOŁAJ', onPressedCallback: () => cancelHelp()),
+          ),
+          Visibility(
+            visible: widget.isAccept,
+            child: RoitButton(
+                text: 'ZAAKCEPTUJ', onPressedCallback: () => acceptHelp()),
+          ),
+          Visibility(
+            visible: widget.isAccept,
+            child: RoitButton(
+                text: 'ODRZUĆ', onPressedCallback: () => declineHelp()),
           )
         ],
       ),
@@ -129,6 +140,14 @@ class _NeederCardScreenState extends State<NeederCardScreen> {
   }
 
   cancelHelp() {
+    print('cancel help');
+  }
+
+  acceptHelp() {
+    print('cancel help');
+  }
+
+  declineHelp() {
     print('cancel help');
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:helpermate/components/archiveHelpingPlan.dart';
+import 'package:helpermate/data/helpTypes.dart';
 import 'package:helpermate/data/helper.dart';
-import 'package:helpermate/data/helpingPlanHelperData.dart';
+import 'package:helpermate/data/helpObject.dart';
 import 'package:helpermate/data/needer.dart';
 import '../neederCardScreen.dart';
 
@@ -14,13 +15,13 @@ class HelpingPlanHelperPanel extends StatefulWidget {
 
 class _HelpingPlanHelperPanelState extends State<HelpingPlanHelperPanel> {
 
-  static Helper me = Helper(email: 'email@email.com', address: 'Glwice Soltysowa 10', fullName: 'Adaam Fertes', telephone: '123654321', dateOfBirth: DateTime(2001), password: 'dsa', iD: 1);
-  static Needer him = Needer(email: 'email@email.com', address: 'Glwice Soltysowa 10', fullName: 'Adaam Fertes', telephone: '123654321', dateOfBirth: DateTime(2001), password: 'dsa', iD: 1);
+  static Helper me = Helper(email: 'email@email.com', address: 'Glwice Soltysowa 10', fullName: 'Adaam Fertes', telephone: '123654321', dateOfBirth: DateTime(2001), password: 'dsa', ID: 2, range: 2);
+  static Needer him = Needer(email: 'email@email.com', address: 'Glwice Soltysowa 10', fullName: 'Adaam Fertes', telephone: '123654321', dateOfBirth: DateTime(2001), password: 'dsa', ID: 2);
 
 
   List<HelpObject> helpingList = <HelpObject> [
-  HelpObject(helper: me, helpingTime: DateTime(2020), helpingKind: "Dog", needer: him),
-  HelpObject(helper: me, helpingTime: DateTime(2020), helpingKind: "Sleep", needer: him),
+  HelpObject(helper: me, helpingTime: DateTime(2020), helpType: HelpType.another, needer: him),
+  HelpObject(helper: me, helpingTime: DateTime(2020), helpType: HelpType.cleaning, needer: him),
   ];
 
   @override
@@ -37,7 +38,8 @@ class _HelpingPlanHelperPanelState extends State<HelpingPlanHelperPanel> {
                     );
                   },
                   leading: CircleAvatar(
-                    backgroundColor: Colors.red,
+                    backgroundColor: Colors.white,
+                    backgroundImage: AssetImage(helpingList[index].helpType.getPath),
                   ),
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

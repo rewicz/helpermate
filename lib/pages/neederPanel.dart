@@ -12,7 +12,7 @@ class NeederPanel extends StatefulWidget {
 class _NeederPanelState extends State<NeederPanel> {
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
-    HelpingPlanNeederPanel(id: 5,),
+    HelpingPlanNeederPanel(),
     NeedHelpNeederPanel(),
     ProfileNeederPanel(),
   ];
@@ -43,12 +43,12 @@ class _NeederPanelState extends State<NeederPanel> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.date_range),
-            label: 'Availability',
+            label: 'Dodaj pomoc',
             backgroundColor: Colors.green,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Profile',
+            label: 'Profil',
             backgroundColor: Colors.pink,
           ),
         ],

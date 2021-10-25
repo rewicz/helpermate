@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "456029437474",
+    "project_id": "helpermate-42e07",
+    "storage_bucket": "helpermate-42e07.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456029437474:android:24563574b013d7bd66547b",
+        "android_client_info": {
+          "package_name": "rakwic.helpermate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456029437474-uagtblckooq3kmo1sd6bp5uug744hc8j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYN2XRQb60t-3-bWiMBoSP8hAmWzlZqLs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456029437474-uagtblckooq3kmo1sd6bp5uug744hc8j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

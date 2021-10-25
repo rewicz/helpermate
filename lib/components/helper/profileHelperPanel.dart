@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:helpermate/components/componentsUI.dart';
 
+import '../geolocalizatior.dart';
+
 class ProfileHelperPanel extends StatefulWidget {
   @override
   _ProfileHelperPanelState createState() => _ProfileHelperPanelState();
@@ -16,7 +18,8 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
   late String houseNB;
   late String apartNB;
   late String province;
-  late double rate ;
+  late double rate;
+
   late int numberOfrate;
   late bool editMode;
   late String dateOfBirth;
@@ -28,10 +31,10 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
     numberOfrate = 20;
     editMode = false;
     dateOfBirth = "2001-11-22";
-    city='Gliwice';
-    street='Paderewskiego';
-    houseNB='10';
-    apartNB='1';
+    city = 'Gliwice';
+    street = 'Paderewskiego';
+    houseNB = '10';
+    apartNB = '1';
     super.initState();
   }
 
@@ -53,32 +56,43 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
     String houseNBDialog = houseNB;
     String apartNBDialog = apartNB;
 
-    return showDialog(context: context, builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('Wpisz adres'),
-        content: SingleChildScrollView(
-            child: ListBody(
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Wpisz adres'),
+            content: SingleChildScrollView(
+                child: ListBody(
               children: [
                 TextInputBox(
                     icon: Icon(Icons.home),
-                    callback: (value) {cityDialog = value;},
+                    callback: (value) {
+                      cityDialog = value;
+                    },
                     text: 'Miejscowość'),
                 TextInputBox(
                     icon: Icon(Icons.home),
-                    callback: (value) {streetDialog = value;},
+                    callback: (value) {
+                      streetDialog = value;
+                    },
                     text: 'Ulica'),
                 TextInputBox(
                     icon: Icon(Icons.home),
-                    callback: (value) {houseNBDialog = value;},
+                    callback: (value) {
+                      houseNBDialog = value;
+                    },
                     text: 'Numer domu'),
                 TextInputBox(
                     icon: Icon(Icons.home),
-                    callback: (value) {apartNBDialog = value;},
+                    callback: (value) {
+                      apartNBDialog = value;
+                    },
                     text: 'Numer mieszkania (opcjonalnie)'),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    RoitButton(text: 'SAVE',
+                    RoitButton(
+                        text: 'SAVE',
                         onPressedCallback: () {
                           this.setState(() {
                             city = cityDialog;
@@ -88,23 +102,22 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
                           });
                           Navigator.of(context).pop();
                         }),
-                    RoitButton(text: 'CANCEL', onPressedCallback: () {
-                      Navigator.of(context).pop();
-                    }),
+                    RoitButton(
+                        text: 'CANCEL',
+                        onPressedCallback: () {
+                          Navigator.of(context).pop();
+                        }),
                   ],
-                )
-
+                ),
               ],
-            )
-
-        ),
-      );
-    });
+            )),
+          );
+        });
   }
 
   @override
   Widget build(BuildContext context) {
-    return  SafeArea(
+    return SafeArea(
       child: GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
@@ -113,7 +126,7 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           children: [
             Text(
-              editMode?"Edycja profilu":"Profil",
+              editMode ? "Edycja profilu" : "Profil",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
             ),
             SizedBox(
@@ -123,8 +136,8 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
               child: Stack(
                 children: [
                   Container(
-                    width: 130,
-                    height: 130,
+                    width: MediaQuery.of(context).size.width / 3,
+                    height: 200,
                     decoration: BoxDecoration(
                         border: Border.all(
                             width: 4,
@@ -163,8 +176,7 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
                             Icons.edit,
                             color: Colors.white,
                           ),
-                        )
-                    ),
+                        )),
                   )
                 ],
               ),
@@ -178,9 +190,13 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
               labelText: "Adam Madej",
               icon: Icon(
                 Icons.person,
+                color: Colors.white,
               ),
               text: "Imię i nazwisko",
-              callback: (String value) {  },
+              callback: (String value) {},
+            ),
+            SizedBox(
+              height: 10,
             ),
             TextInputBox(
               readonly: !editMode,
@@ -189,7 +205,10 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
                 Icons.email,
               ),
               text: "Email",
-              callback: (String value) {  },
+              callback: (String value) {},
+            ),
+            SizedBox(
+              height: 10,
             ),
             TextInputBox(
               readonly: !editMode,
@@ -198,12 +217,18 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
                 Icons.phone,
               ),
               text: "Numer telefonu",
-              callback: (String value) {  },
+              callback: (String value) {},
+            ),
+            SizedBox(
+              height: 10,
             ),
             PasswordLabelBox(
               readonly: !editMode,
               labelText: "1234",
               text: "Hasło",
+            ),
+            SizedBox(
+              height: 10,
             ),
             Row(
               children: [
@@ -212,15 +237,23 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
                     readonly: !editMode,
                     labelText: dateOfBirth,
                     icon: Icon(Icons.date_range),
-                    callback: (String value) { dateOfBirth = value; },
+                    callback: (String value) {
+                      dateOfBirth = value;
+                    },
                     text: 'Data urodzenia',
                   ),
                 ),
                 Visibility(
                     visible: editMode,
-                    child: RoitButton(text: "Edytuj", onPressedCallback: () {_selectDate(context);})
-                ),
+                    child: RoitButton(
+                        text: "Edytuj",
+                        onPressedCallback: () {
+                          _selectDate(context);
+                        })),
               ],
+            ),
+            SizedBox(
+              height: 10,
             ),
             Row(
               children: [
@@ -229,18 +262,26 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
                     readonly: !editMode,
                     labelText: '$city $street $houseNB/$apartNB',
                     icon: Icon(Icons.home),
-                    callback: (String value) {  },
+                    callback: (String value) {},
                     text: 'Adres zamieszkania',
                   ),
                 ),
                 Visibility(
-                  visible: editMode,
-                    child: RoitButton(text: "Edytuj", onPressedCallback: () {
-                      showChoiceDialog(context);
-                    })
-                ),
+                    visible: editMode,
+                    child: RoitButton(
+                        text: "Edytuj",
+                        onPressedCallback: () {
+                          showChoiceDialog(context);
+                        })),
               ],
             ),
+            SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Geolocalizator(isLocated: false, editMode: editMode),
             SizedBox(
               height: 35,
             ),
@@ -260,21 +301,23 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  RoitButton(text: 'SAVE',
+                  RoitButton(
+                      text: 'SAVE',
                       onPressedCallback: () {
-                    setState(() {
-                      editMode = false;
-                    });
-                  }),
-                  RoitButton(text: 'CANCEL', onPressedCallback: () {
-                    setState(() {
-                      editMode = false;
-                    });
-                  }),
+                        setState(() {
+                          editMode = false;
+                        });
+                      }),
+                  RoitButton(
+                      text: 'CANCEL',
+                      onPressedCallback: () {
+                        setState(() {
+                          editMode = false;
+                        });
+                      }),
                 ],
               ),
             )
-
           ],
         ),
       ),

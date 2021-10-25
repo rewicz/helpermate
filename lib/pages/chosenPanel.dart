@@ -11,58 +11,54 @@ class _ChosenPanelState extends State<ChosenPanel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
         actions: [EasyDynamicThemeSwitch()],
-    ),
-    body: Container(
-      color: Theme.of(context).backgroundColor,
-      width: double.infinity,
-      height: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            width: 400.0,
-            height: 200.0,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Theme.of(context).buttonColor,
-                ),
-                onPressed: () => {
-                  Navigator.pushNamed(context, '/helper')
-                },
-                child: Text(
-                  "Chętny do pomocy",
-                  style: TextStyle(color: Theme.of(context).accentColor),
-                ),
-              ),
-            ),
-          ),
-          Container(
-            width: 400.0,
-            height: 200.0,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Theme.of(context).buttonColor,
-                ),
-                onPressed: () => {
-                  Navigator.pushNamed(context, '/needer')
-                },
-                child: Text(
-                  "Potrzebujący",
-                  style: TextStyle(color: Theme.of(context).accentColor),
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
-    ),
+      body: Container(
+        color: Theme.of(context).backgroundColor,
+        width: double.infinity,
+        height: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 400.0,
+              height: 200.0,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Theme.of(context).buttonColor,
+                  ),
+                  onPressed: () => {Navigator.pushNamed(context, '/helper')},
+                  child: Text(
+                    "Chętny do pomocy",
+                    style: TextStyle(color: Theme.of(context).accentColor),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              width: 400.0,
+              height: 200.0,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Theme.of(context).buttonColor,
+                  ),
+                  onPressed: () => {Navigator.pushNamed(context, '/needer')},
+                  child: Text(
+                    "Potrzebujący",
+                    style: TextStyle(color: Theme.of(context).accentColor),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

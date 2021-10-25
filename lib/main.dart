@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'HelepMate',
       debugShowCheckedModeBanner: false,
       theme: lightThemeData,
-      darkTheme: darkThemeData,
+      darkTheme: contrastThemeData,
       themeMode: EasyDynamicTheme.of(context).themeMode,
       initialRoute: '/',
       routes: {

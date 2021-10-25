@@ -101,11 +101,18 @@ class _AvailiabilityHelperPanelState extends State<AvailiabilityHelperPanel> {
             ),
           ),
           ..._getEventsfromDay(selectedDay).map((Event event) => Card(
-                child: Text(
-                  event.toString(),
-                  style: TextStyle(
-                    fontSize: 25,
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      event.toString(),
+                      style: TextStyle(
+                        fontSize: 25,
+                      ),
+                    ),
+                    RoitButton(text: 'Modyfikuj', onPressedCallback: () {}),
+                    RoitButton(text: 'Usuń', onPressedCallback: () {}),
+                  ],
                 ),
               ),
             )

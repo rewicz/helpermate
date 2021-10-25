@@ -5,7 +5,7 @@ class TitleBox extends StatelessWidget {
   final String title;
 
   TitleBox({
-      required this.title,
+    required this.title,
   });
 
   @override
@@ -22,29 +22,26 @@ class TitleBox extends StatelessWidget {
 }
 
 class TextInputBox extends StatelessWidget {
-
   final ValueSetter<String> callback;
   final String text;
   final Icon icon;
   final String hint;
   final String labelText;
   final bool readonly;
-  final TextInputType keyboardType ;
+  final TextInputType keyboardType;
+
   String? Function(String?)? validatorMethod;
   GestureTapCallback? onTap;
 
-  TextInputBox({
-    this.labelText : "",
-    this.readonly : false,
+  TextInputBox({this.labelText: "",
+    this.readonly: false,
     this.onTap,
     this.validatorMethod,
-    this.keyboardType : TextInputType.text,
-    this.hint : "",
+    this.keyboardType: TextInputType.text,
+    this.hint: "",
     required this.icon,
     required this.callback,
-    required this.text
-    }
-  );
+    required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +53,6 @@ class TextInputBox extends StatelessWidget {
           Text(
             text,
             style: TextStyle(
-              color: Colors.black,
               fontSize: 20.0,
               fontWeight: FontWeight.normal,
             ),
@@ -69,13 +65,11 @@ class TextInputBox extends StatelessWidget {
             keyboardType: keyboardType,
             decoration: InputDecoration(
               focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)
-              ),
+                  borderSide: BorderSide(color: Colors.white)),
               focusColor: Colors.amberAccent,
               prefixIcon: icon,
               hintText: hint,
             ),
-
             validator: validatorMethod,
             onChanged: callback,
           ),
@@ -84,7 +78,6 @@ class TextInputBox extends StatelessWidget {
     );
   }
 }
-
 
 class PasswordLabelBox extends StatefulWidget {
   final String text;
@@ -98,71 +91,64 @@ class PasswordLabelBox extends StatefulWidget {
   });
 
   @override
-  _PasswordLabelBoxState createState() => _PasswordLabelBoxState(text: text, labelText:labelText, readonly: readonly);
+  _PasswordLabelBoxState createState() =>
+      _PasswordLabelBoxState(
+          text: text, labelText: labelText, readonly: readonly);
 }
 
 class _PasswordLabelBoxState extends State<PasswordLabelBox> {
-    final String text;
-    final String labelText;
-    final bool readonly;
+  final String text;
+  final String labelText;
+  final bool readonly;
 
-    bool showPassword = false;
+  bool showPassword = false;
 
-    _PasswordLabelBoxState({
-      required this.readonly,
-      required this.labelText,
-      required this.text
-    });
+  _PasswordLabelBoxState(
+      {required this.readonly, required this.labelText, required this.text});
 
-    @override
-    Widget build(BuildContext context) {
-      return Container(
-        width: 350.0,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              text,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20.0,
-                fontWeight: FontWeight.normal,
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 350.0,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+          TextFormField(
+            initialValue: labelText,
+            obscureText: !showPassword,
+            obscuringCharacter: "*",
+            readOnly: readonly,
+            decoration: InputDecoration(
+              focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white)),
+              prefixIcon: Icon(
+                Icons.lock,
+              ),
+              suffixIcon: IconButton(
+                onPressed: () {
+                  setState(() {
+                    showPassword = !showPassword;
+                  });
+                },
+                icon: Icon(
+                  Icons.remove_red_eye,
+                  color: Colors.grey,
+                ),
               ),
             ),
-            TextFormField(
-              initialValue: labelText,
-              obscureText: !showPassword,
-              obscuringCharacter: "*",
-              readOnly: readonly,
-              decoration: InputDecoration(
-                  focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white)
-                  ),
-                  prefixIcon: Icon(
-                    Icons.lock,
-                  ),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        showPassword = !showPassword;
-                      });
-                    },
-                    icon: Icon(
-                      Icons.remove_red_eye,
-                      color: Colors.grey,
-                    ),
-                  ),
-              ),
-
-            ),
-          ],
-        ),
-      );
-    }
-
+          ),
+        ],
+      ),
+    );
   }
-
-
+}
 
 class DataPickerBox extends StatefulWidget {
   final String text;
@@ -174,22 +160,19 @@ class DataPickerBox extends StatefulWidget {
   });
 
   @override
-  _DataPickerBoxState createState() => _DataPickerBoxState(text: text, callback: callback);
+  _DataPickerBoxState createState() =>
+      _DataPickerBoxState(text: text, callback: callback);
 }
 
 class _DataPickerBoxState extends State<DataPickerBox> {
-
   DateTime currentDate = DateTime.now();
   String text;
   ValueSetter<DateTime> callback;
   bool wybranaData = false;
-  final TextEditingController _textController = new TextEditingController(text: 'RRRR-MM-DD');
+  final TextEditingController _textController =
+  new TextEditingController(text: 'RRRR-MM-DD');
 
-
-  _DataPickerBoxState({
-    required this.callback,
-    required this.text
-  });
+  _DataPickerBoxState({required this.callback, required this.text});
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -215,7 +198,6 @@ class _DataPickerBoxState extends State<DataPickerBox> {
           Text(
             text,
             style: TextStyle(
-              color: Colors.white,
               fontSize: 20.0,
               fontWeight: FontWeight.normal,
             ),
@@ -223,11 +205,12 @@ class _DataPickerBoxState extends State<DataPickerBox> {
           TextFormField(
             controller: _textController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            onTap: () {_selectDate(context);},
+            onTap: () {
+              _selectDate(context);
+            },
             decoration: InputDecoration(
               focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)
-              ),
+                  borderSide: BorderSide(color: Colors.white)),
               focusColor: Colors.amberAccent,
               prefixIcon: Icon(
                 Icons.date_range,
@@ -237,34 +220,40 @@ class _DataPickerBoxState extends State<DataPickerBox> {
           )
         ],
       ),
-    );;
+    );
+    ;
   }
 }
 
-
 class RoitButton extends StatelessWidget {
   final String text;
-  Function onPressedCallback;
+  VoidCallback? onPressedCallback;
 
-  RoitButton({
-    required this.text,
-    required this.onPressedCallback
-  });
-
+  RoitButton({required this.text, required this.onPressedCallback});
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(50),
-      child: TextButton(
-        onPressed: () {onPressedCallback();},
-        child: Text(
-          text,
-          style: TextStyle(color: Colors.black),
+    return Container(
+      width: MediaQuery.of(context).size.width/4,
+      height: MediaQuery.of(context).size.height/18,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(50),
+        child: TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor: Theme
+                .of(context)
+                .buttonColor,
+          ),
+          onPressed: onPressedCallback,
+          child: Text(
+            text,
+            style: TextStyle(color: Theme
+                .of(context)
+                .accentColor),
+          ),
         ),
       ),
     );
-
   }
 }
 
@@ -272,10 +261,7 @@ class Rating extends StatelessWidget {
   double rate;
   int numberOfrate;
 
-  Rating({
-    required this.rate,
-    required this.numberOfrate
-  });
+  Rating({required this.rate, required this.numberOfrate});
 
   @override
   Widget build(BuildContext context) {
@@ -283,7 +269,7 @@ class Rating extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-        "Rating: ($numberOfrate): ",
+          "Rating: ($numberOfrate): ",
           style: TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
@@ -297,11 +283,12 @@ class Rating extends StatelessWidget {
           itemCount: 5,
           ignoreGestures: true,
           itemPadding: EdgeInsets.symmetric(horizontal: 3.0),
-          itemBuilder: (context, _) => Icon(
-            Icons.star,
-            color: Colors.amber,
-          ),
-          onRatingUpdate: (double value) {  },
+          itemBuilder: (context, _) =>
+              Icon(
+                Icons.star,
+                color: Colors.amber,
+              ),
+          onRatingUpdate: (double value) {},
         ),
       ],
     );
@@ -313,14 +300,12 @@ class DropDownBox extends StatefulWidget {
   List<String> items;
   ValueSetter<String> callback;
 
-  DropDownBox({
-    required this.items,
-    required this.callback,
-    required this.initValue
-  });
+  DropDownBox(
+      {required this.items, required this.callback, required this.initValue});
 
   @override
-  State<DropDownBox> createState() => _DropDownBoxState(items: items, initValue: initValue, callback: callback);
+  State<DropDownBox> createState() =>
+      _DropDownBoxState(items: items, initValue: initValue, callback: callback);
 }
 
 class _DropDownBoxState extends State<DropDownBox> {
@@ -328,25 +313,19 @@ class _DropDownBoxState extends State<DropDownBox> {
   String initValue;
   ValueSetter<String> callback;
 
-
-  _DropDownBoxState({
-    required this.items,
-    required this.callback,
-    required this.initValue
-  });
+  _DropDownBoxState(
+      {required this.items, required this.callback, required this.initValue});
 
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
-
       value: initValue,
       icon: const Icon(Icons.arrow_downward),
       iconSize: 24,
       elevation: 26,
       style: const TextStyle(
-          color: Colors.deepPurple,
+        color: Colors.deepPurple,
         fontSize: 20.0,
-
       ),
       underline: Container(
         height: 2,
@@ -367,5 +346,3 @@ class _DropDownBoxState extends State<DropDownBox> {
     );
   }
 }
-
-

@@ -32,6 +32,8 @@
 	<string>I need permission to make you photo</string>
 	<key>NSCameraUsageDescription</key>
 	<string>I need permission to make you photo</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>I need permission to get localization</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

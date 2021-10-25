@@ -9,7 +9,7 @@ var lightThemeData = new ThemeData(
     accentColor: Colors.white
 );
 
-var darkThemeData = ThemeData(
+var contrastThemeData = ThemeData(
     backgroundColor: Colors.black,
     buttonColor: Colors.yellow, //działa
     primaryColor: Colors.black, // appbar

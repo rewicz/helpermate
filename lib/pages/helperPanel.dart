@@ -71,7 +71,6 @@ class HelperPanelState extends State<HelperPanel> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[100],
         onTap: _onItemTapped,
       ),
     );

@@ -1,21 +1,16 @@
-class Needer {
-  int iD;
 
-  String fullName;
-  String email;
-  String telephone;
-  String password;
-  DateTime dateOfBirth;
-  String address;
+import 'package:helpermate/data/user.dart';
 
-  Needer({
-    required this.iD,
-    required this.fullName,
-    required this.email,
-    required this.telephone,
-    required this.password,
-    required this.dateOfBirth,
-    required this.address
-  });
+class Needer extends User {
 
+  Needer({required int ID, required String email, required String telephone,
+    required String password, required DateTime dateOfBirth, required String address, required String fullName})
+      : super(
+      ID: ID,
+      fullName: fullName,
+      email: email,
+      telephone: telephone,
+      password: password,
+      dateOfBirth: dateOfBirth,
+      address: address);
 }

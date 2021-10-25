@@ -1,21 +1,24 @@
-class Helper {
-  int iD;
+import 'package:helpermate/data/user.dart';
 
-  String fullName;
-  String email;
-  String telephone;
-  String password;
-  DateTime dateOfBirth;
-  String address;
+class Helper extends User {
 
-  Helper({
-    required this.iD,
-    required this.fullName,
-    required this.email,
-    required this.telephone,
-    required this.password,
-    required this.dateOfBirth,
-    required this.address
-  });
+  int range;
 
+  Helper(
+      {required int ID,
+      required String email,
+      required String telephone,
+      required String password,
+      required DateTime dateOfBirth,
+      required String address,
+      required this.range,
+      required String fullName})
+      : super(
+            ID: ID,
+            fullName: fullName,
+            email: email,
+            telephone: telephone,
+            password: password,
+            dateOfBirth: dateOfBirth,
+            address: address);
 }

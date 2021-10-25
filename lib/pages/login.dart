@@ -59,23 +59,7 @@ class _LoginState extends State<Login> {
                   }
                 },
               ),
-              Container(
-                width: 100.0,
-                height: 50.0,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: Theme.of(context).buttonColor,
-                    ),
-                    onPressed: () => {submitPassword()},
-                    child: Text(
-                      "ZALOGUJ",
-                      style: TextStyle(color: Theme.of(context).accentColor),
-                    ),
-                  ),
-                ),
-              ),
+              RoitButton(onPressedCallback: () { submitPassword(); }, text: 'ZALOGUJ',),
               GestureDetector(
                 onTap: () => {Navigator.pushNamed(context, '/signUp')},
                 child: RichText(

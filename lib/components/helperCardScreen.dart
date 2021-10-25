@@ -3,23 +3,24 @@ import 'package:helpermate/data/helpObject.dart';
 
 import 'componentsUI.dart';
 
-class NeederCardScreen extends StatefulWidget {
+
+class HelperCardScreen extends StatefulWidget {
   HelpObject helpObject;
   bool vote = false;
   bool isEnd = false;
   bool isAccept = true;
 
-  NeederCardScreen({required this.helpObject});
+
+  HelperCardScreen({required this.helpObject});
 
   @override
-  _NeederCardScreenState createState() => _NeederCardScreenState();
+  _HelperCardScreenState createState() => _HelperCardScreenState();
 }
 
-class _NeederCardScreenState extends State<NeederCardScreen> {
+class _HelperCardScreenState extends State<HelperCardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Karta pomocy')),
       body: ListView(
         children: [
           SizedBox(
@@ -45,9 +46,6 @@ class _NeederCardScreenState extends State<NeederCardScreen> {
                       "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
                     ))),
           ),
-          SizedBox(
-            height: 30,
-          ),
           Center(
             child: Text(
               widget.helpObject.needer.fullName,
@@ -56,13 +54,7 @@ class _NeederCardScreenState extends State<NeederCardScreen> {
               ),
             ),
           ),
-          SizedBox(
-            height: 30,
-          ),
           Rating(rate: 1, numberOfrate: 30),
-          SizedBox(
-            height: 30,
-          ),
           Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -81,9 +73,6 @@ class _NeederCardScreenState extends State<NeederCardScreen> {
                 ),
               ],
             ),
-          ),
-          SizedBox(
-            height: 30,
           ),
           Center(
             child: Row(
@@ -104,9 +93,6 @@ class _NeederCardScreenState extends State<NeederCardScreen> {
               ],
             ),
           ),
-          SizedBox(
-            height: 30,
-          ),
           Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -126,27 +112,19 @@ class _NeederCardScreenState extends State<NeederCardScreen> {
               ],
             ),
           ),
-          SizedBox(
-            height: 30,
-          ),
           Visibility(
             child: RoitButton(
                 text: 'ODWOŁAJ', onPressedCallback: () => cancelHelp()),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Visibility(
-                visible: widget.isAccept,
-                child: RoitButton(
-                    text: 'ZAAKCEPTUJ', onPressedCallback: () => acceptHelp()),
-              ),
-              Visibility(
-                visible: widget.isAccept,
-                child: RoitButton(
-                    text: 'ODRZUĆ', onPressedCallback: () => declineHelp()),
-              )
-            ],
+          Visibility(
+            visible: widget.isAccept,
+            child: RoitButton(
+                text: 'ZAAKCEPTUJ', onPressedCallback: () => acceptHelp()),
+          ),
+          Visibility(
+            visible: widget.isAccept,
+            child: RoitButton(
+                text: 'ODRZUĆ', onPressedCallback: () => declineHelp()),
           )
         ],
       ),

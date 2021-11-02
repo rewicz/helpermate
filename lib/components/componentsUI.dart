@@ -33,15 +33,16 @@ class TextInputBox extends StatelessWidget {
   String? Function(String?)? validatorMethod;
   GestureTapCallback? onTap;
 
-  TextInputBox({this.labelText: "",
-    this.readonly: false,
-    this.onTap,
-    this.validatorMethod,
-    this.keyboardType: TextInputType.text,
-    this.hint: "",
-    required this.icon,
-    required this.callback,
-    required this.text});
+  TextInputBox(
+      {this.labelText: "",
+      this.readonly: false,
+      this.onTap,
+      this.validatorMethod,
+      this.keyboardType: TextInputType.text,
+      this.hint: "",
+      required this.icon,
+      required this.callback,
+      required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -83,17 +84,18 @@ class PasswordLabelBox extends StatefulWidget {
   final String text;
   final String labelText;
   final bool readonly;
+  final ValueSetter<String> callback;
 
   PasswordLabelBox({
     required this.text,
     required this.labelText,
     required this.readonly,
+    required this.callback,
   });
 
   @override
-  _PasswordLabelBoxState createState() =>
-      _PasswordLabelBoxState(
-          text: text, labelText: labelText, readonly: readonly);
+  _PasswordLabelBoxState createState() => _PasswordLabelBoxState(
+      text: text, labelText: labelText, readonly: readonly);
 }
 
 class _PasswordLabelBoxState extends State<PasswordLabelBox> {
@@ -121,28 +123,29 @@ class _PasswordLabelBoxState extends State<PasswordLabelBox> {
             ),
           ),
           TextFormField(
+            onChanged: widget.callback,
             initialValue: labelText,
             obscureText: !showPassword,
             obscuringCharacter: "*",
             readOnly: readonly,
             decoration: InputDecoration(
-              focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)),
-              prefixIcon: Icon(
-                Icons.lock,
-              ),
-              suffixIcon: IconButton(
-                onPressed: () {
-                  setState(() {
-                    showPassword = !showPassword;
-                  });
-                },
-                icon: Icon(
-                  Icons.remove_red_eye,
-                  color: Colors.grey,
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white)),
+                prefixIcon: Icon(
+                  Icons.lock,
                 ),
-              ),
-            ),
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      showPassword = !showPassword;
+                    });
+                  },
+                  icon: Icon(
+                    Icons.remove_red_eye,
+                    color: Colors.grey,
+                  ),
+                ),
+                hintText: 'Wpisz hasło'),
           ),
         ],
       ),
@@ -170,7 +173,7 @@ class _DataPickerBoxState extends State<DataPickerBox> {
   ValueSetter<DateTime> callback;
   bool wybranaData = false;
   final TextEditingController _textController =
-  new TextEditingController(text: 'RRRR-MM-DD');
+      new TextEditingController(text: 'RRRR-MM-DD');
 
   _DataPickerBoxState({required this.callback, required this.text});
 
@@ -234,22 +237,18 @@ class RoitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width/4,
-      height: MediaQuery.of(context).size.height/18,
+      width: MediaQuery.of(context).size.width / 4,
+      height: MediaQuery.of(context).size.height / 18,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(50),
         child: TextButton(
           style: TextButton.styleFrom(
-            backgroundColor: Theme
-                .of(context)
-                .buttonColor,
+            backgroundColor: Theme.of(context).buttonColor,
           ),
           onPressed: onPressedCallback,
           child: Text(
             text,
-            style: TextStyle(color: Theme
-                .of(context)
-                .accentColor),
+            style: TextStyle(color: Theme.of(context).accentColor),
           ),
         ),
       ),
@@ -283,11 +282,10 @@ class Rating extends StatelessWidget {
           itemCount: 5,
           ignoreGestures: true,
           itemPadding: EdgeInsets.symmetric(horizontal: 3.0),
-          itemBuilder: (context, _) =>
-              Icon(
-                Icons.star,
-                color: Colors.amber,
-              ),
+          itemBuilder: (context, _) => Icon(
+            Icons.star,
+            color: Colors.amber,
+          ),
           onRatingUpdate: (double value) {},
         ),
       ],

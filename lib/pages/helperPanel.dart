@@ -1,27 +1,25 @@
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:helpermate/components/helper/availiabilityHelperPanel.dart';
 import 'package:helpermate/components/helper/helpingPlanHelperPanel.dart';
 import 'package:helpermate/components/helper/offeredHelpHelperPanel.dart';
 import 'package:helpermate/components/helper/profileHelperPanel.dart';
+import 'package:helpermate/services/authService.dart';
 
 class HelperPanel extends StatefulWidget {
-  const HelperPanel({Key? key}) : super(key: key);
+  final Function onSignOut;
+
+  HelperPanel({required this.onSignOut});
 
   @override
   State<HelperPanel> createState() => HelperPanelState();
 }
 
-/// This is the private State class that goes with MyStatefulWidget.
 class HelperPanelState extends State<HelperPanel> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
     HelpingPlanHelperPanel(
-    ),
-    AvailiabilityHelperPanel(
-
     ),
     OfferedHelpHelperPanel(
     ),
@@ -39,10 +37,17 @@ class HelperPanelState extends State<HelperPanel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme
+          .of(context)
+          .backgroundColor,
       appBar: AppBar(
         title: const Text('Chętny do pomocy'),
-        actions: [EasyDynamicThemeSwitch()],
+        actions: [EasyDynamicThemeSwitch(), TextButton(onPressed: () {
+          Navigator.pop(context);
+          AuthService().signOut();
+          widget.onSignOut();
+        }, child: Text('logout'),)
+        ],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -53,11 +58,6 @@ class HelperPanelState extends State<HelperPanel> {
             icon: Icon(Icons.health_and_safety),
             label: 'Plan pomocy',
             backgroundColor: Colors.red,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.date_range),
-            label: 'Dostępność',
-            backgroundColor: Colors.green,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.record_voice_over_outlined),

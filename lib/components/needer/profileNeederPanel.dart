@@ -124,6 +124,7 @@ class _ProfileNeederPanelState extends State<ProfileNeederPanel> {
               readonly: !editMode,
               labelText: "1234",
               text: "Password",
+              callback: (String value) {  },
             ),
             DataPickerBox(
               text: 'Date of birth',

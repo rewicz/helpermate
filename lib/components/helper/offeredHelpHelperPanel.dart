@@ -5,6 +5,7 @@ import 'package:helpermate/data/helpObject.dart';
 import 'package:helpermate/data/needer.dart';
 
 import '../componentsUI.dart';
+import '../neederCardScreen.dart';
 
 class OfferedHelpHelperPanel extends StatefulWidget {
   @override
@@ -33,12 +34,32 @@ class _OfferedHelpHelperPanelState extends State<OfferedHelpHelperPanel> {
     HelpObject(
         helper: me,
         helpingTime: DateTime(2020),
-        helpType: HelpType.compan,
+        helpType: HelpType.another,
         needer: him),
     HelpObject(
         helper: me,
         helpingTime: DateTime(2020),
         helpType: HelpType.computer,
+        needer: him),
+    HelpObject(
+        helper: me,
+        helpingTime: DateTime(2020),
+        helpType: HelpType.another,
+        needer: him),
+    HelpObject(
+        helper: me,
+        helpingTime: DateTime(2020),
+        helpType: HelpType.walk_dog,
+        needer: him),
+    HelpObject(
+        helper: me,
+        helpingTime: DateTime(2020),
+        helpType: HelpType.another,
+        needer: him),
+    HelpObject(
+        helper: me,
+        helpingTime: DateTime(2020),
+        helpType: HelpType.shopping,
         needer: him),
   ];
 
@@ -86,7 +107,8 @@ class _OfferedHelpHelperPanelState extends State<OfferedHelpHelperPanel> {
                   Row(children: [
                     RoitButton(text: 'Szukaj', onPressedCallback: () {}),
                     RoitButton(text: 'Anuluj', onPressedCallback: () {}),
-                  ]),
+                  ]
+                  ),
                 ],
               ),
             ),
@@ -102,6 +124,7 @@ class _OfferedHelpHelperPanelState extends State<OfferedHelpHelperPanel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: RoitButton(
@@ -125,7 +148,25 @@ class _OfferedHelpHelperPanelState extends State<OfferedHelpHelperPanel> {
           itemBuilder: (context, index) {
             return Card(
               child: ListTile(
-                title: Text(""),
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => NeederCardScreen(helpObject: helpingList[index]))
+                    );
+                  },
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    backgroundImage: AssetImage(helpingList[index].helpType.getPath),
+                  ),
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(helpingList[index].helpingTime.toString().substring(0, 11)),
+                      Text(helpingList[index].needer.fullName),
+                      Text('1,6km'),
+
+                    ],
+                  )
+
               ),
             );
           }),

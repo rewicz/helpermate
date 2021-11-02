@@ -1,17 +1,21 @@
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:helpermate/components/componentsUI.dart';
+import 'package:helpermate/pages/signUp.dart';
+import 'package:helpermate/services/authService.dart';
 
 class Login extends StatefulWidget {
+  final Function(User?) onSignIn;
+
+  Login({required this.onSignIn});
 
   @override
   _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-
   final formKey = GlobalKey<FormState>();
-
   late String email = "";
   late String password = "";
 
@@ -33,52 +37,57 @@ class _LoginState extends State<Login> {
             children: [
               TitleBox(title: 'Zaloguj'),
               TextInputBox(
-                hint: "Wpisz email",
-                icon:  Icon(
-                  Icons.email,
-                  color: Colors.white,
-                ),
-                text: 'Email',
-                callback: (String value) {email = value;},
-                validatorMethod: (value) {
-                  //nothing
-                }
-              ),
-              TextInputBox(
-                hint: "Wpisz hasło",
-                icon:  Icon(
-                  Icons.lock,
-                  color: Colors.white,
-                ),
-                text: 'Hasło',
-                callback: (String value) {password = value;},
-                 // ignore: non_constant_identifier_names
-                validatorMethod: (value) {
-                  if(value != null) {
+                  hint: "Wpisz email",
+                  icon: Icon(
+                    Icons.email,
+                    color: Colors.white,
+                  ),
+                  text: 'Email',
+                  callback: (String value) {
+                    email = value;
+                  },
+                  validatorMethod: (value) {
                     //nothing
-                  }
+                  }),
+              PasswordLabelBox(
+                text: 'Hasło',
+                callback: (String value) {
+                  password = value;
                 },
+                readonly: false,
+                labelText: '',
               ),
-              RoitButton(onPressedCallback: () { submitPassword(); }, text: 'ZALOGUJ',),
+              RoitButton(
+                onPressedCallback: () {
+                  AuthService().signInEmail(email, password).then((value) {
+                    widget.onSignIn(value);
+                  });
+                },
+                text: 'ZALOGUJ',
+              ),
               GestureDetector(
-                onTap: () => {Navigator.pushNamed(context, '/signUp')},
+                onTap: () => {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => SignUp(
+                            onSignIn: widget.onSignIn,
+                          )))
+                },
                 child: RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                            text: 'Nie masz konta?  ',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Nie masz konta?  ',
+                        style: TextStyle(
+                          color: Colors.white,
                         ),
-                        TextSpan(
-                            text: 'Zarejestruj się',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold
-                            ),
-                        ),
-                    ],),
+                      ),
+                      TextSpan(
+                        text: 'Zarejestruj się',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -87,13 +96,4 @@ class _LoginState extends State<Login> {
       ),
     );
   }
-
-  void submitPassword() {
-    final isValid = formKey.currentState!.validate();
-    print("$email, $password");
-    if(isValid) {
-      Navigator.pushNamed(context, '/chosen');
-    }
-  }
-
 }

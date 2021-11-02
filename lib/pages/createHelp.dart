@@ -45,6 +45,7 @@ class _CreateHelpState extends State<CreateHelp> {
                   icon: Icon(Icons.comment),
                   callback: (value) {},
                   text: "Dodatkowy komentarz"),
+              SizedBox(height: 20.0,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

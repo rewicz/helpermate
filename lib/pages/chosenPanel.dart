@@ -1,8 +1,13 @@
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:helpermate/data/sessionData.dart';
+import 'package:helpermate/pages/helperPanel.dart';
+import 'package:helpermate/pages/neederPanel.dart';
 
 class ChosenPanel extends StatefulWidget {
+  final Function onSignOut;
+
+  ChosenPanel({required this.onSignOut});
+
   @override
   _ChosenPanelState createState() => _ChosenPanelState();
 }
@@ -31,7 +36,10 @@ class _ChosenPanelState extends State<ChosenPanel> {
                   style: TextButton.styleFrom(
                     backgroundColor: Theme.of(context).buttonColor,
                   ),
-                  onPressed: () => {Navigator.pushNamed(context, '/helper')},
+                  onPressed: () => {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (_) => HelperPanel(onSignOut: widget.onSignOut)))
+                  },
                   child: Text(
                     "Chętny do pomocy",
                     style: TextStyle(color: Theme.of(context).accentColor),
@@ -48,7 +56,10 @@ class _ChosenPanelState extends State<ChosenPanel> {
                   style: TextButton.styleFrom(
                     backgroundColor: Theme.of(context).buttonColor,
                   ),
-                  onPressed: () => {Navigator.pushNamed(context, '/needer')},
+                  onPressed: () => {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (_) => NeederPanel(onSignOut: widget.onSignOut,)))
+                  },
                   child: Text(
                     "Potrzebujący",
                     style: TextStyle(color: Theme.of(context).accentColor),

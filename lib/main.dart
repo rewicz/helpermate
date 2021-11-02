@@ -1,14 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:helpermate/pages/login.dart';
-import 'package:helpermate/pages/chosenPanel.dart';
-import 'package:helpermate/pages/helperPanel.dart';
-import 'package:helpermate/pages/neederPanel.dart';
-import 'package:helpermate/pages/signUp.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:helpermate/styles/theme.dart';
 
+import 'decisionTree.dart';
 
-void main() async {
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(
     EasyDynamicThemeWidget(
       child: MyApp(),
@@ -17,24 +18,16 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final String title = 'EDT - Example';
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'HelepMate',
+      title: 'HeleperMate',
       debugShowCheckedModeBanner: false,
       theme: lightThemeData,
       darkTheme: contrastThemeData,
       themeMode: EasyDynamicTheme.of(context).themeMode,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => Login(),
-        '/signUp': (context) => SignUp(),
-        '/chosen': (context) => ChosenPanel(),
-        '/helper': (context) => HelperPanel(),
-        '/needer': (context) => NeederPanel(),
-      },
+      home: DecisionTree(),
     );
   }
 }
+

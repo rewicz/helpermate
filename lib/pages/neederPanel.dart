@@ -5,6 +5,11 @@ import 'package:helpermate/components/needer/needHelpNeederPanel.dart';
 import 'package:helpermate/components/needer/profileNeederPanel.dart';
 
 class NeederPanel extends StatefulWidget {
+  final Function onSignOut;
+
+  NeederPanel({required this.onSignOut});
+
+
   @override
   _NeederPanelState createState() => _NeederPanelState();
 }

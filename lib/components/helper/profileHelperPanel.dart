@@ -88,6 +88,7 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
                       apartNBDialog = value;
                     },
                     text: 'Numer mieszkania (opcjonalnie)'),
+                SizedBox(height: 20.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -225,7 +226,7 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
             PasswordLabelBox(
               readonly: !editMode,
               labelText: "1234",
-              text: "Hasło",
+              text: "Hasło", callback: (String value) {  },
             ),
             SizedBox(
               height: 10,
@@ -276,10 +277,7 @@ class _ProfileHelperPanelState extends State<ProfileHelperPanel> {
               ],
             ),
             SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: 10,
+              height: 20,
             ),
             Geolocalizator(isLocated: false, editMode: editMode),
             SizedBox(

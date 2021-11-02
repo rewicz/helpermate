@@ -27,7 +27,8 @@ class _HelpingPlanHelperPanelState extends State<HelpingPlanHelperPanel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView.builder(
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: ListView.builder(
           itemCount: helpingList.length,
             itemBuilder: (context, index){
               return Card(

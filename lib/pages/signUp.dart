@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:helpermate/components/componentsUI.dart';
 import 'package:helpermate/pages/settingsPage.dart';
-import 'package:helpermate/services/authService.dart';
+import 'package:helpermate/firebase/services/authService.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SignUp2 extends StatefulWidget {

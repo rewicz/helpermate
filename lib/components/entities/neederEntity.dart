@@ -1,18 +1,12 @@
-class User {
+class NeederEntity {
   String fullName;
   String email;
   String telephone;
   DateTime dateOfBirth;
   String address;
-  double rate;
-  int amountOdRates;
-  int localization;
 
-  User({
+  NeederEntity({
     required this.fullName,
-    required this.localization,
-    required this.rate,
-    required this.amountOdRates,
     required this.email,
     required this.telephone,
     required this.dateOfBirth,

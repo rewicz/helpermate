@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:helpermate/components/helper/helpingPlanHelperPanel.dart';
 import 'package:helpermate/components/helper/offeredHelpHelperPanel.dart';
 import 'package:helpermate/components/helper/profileHelperPanel.dart';
-import 'package:helpermate/services/authService.dart';
+import 'package:helpermate/firebase/services/authService.dart';
+import 'package:helpermate/firebase/services/userSecureStorage.dart';
+import 'package:helpermate/pages/settingsPage.dart';
 
 class HelperPanel extends StatefulWidget {
   final Function onSignOut;
@@ -34,19 +36,39 @@ class HelperPanelState extends State<HelperPanel> {
     });
   }
 
+  final controllerName = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  Future init() async {
+    await UserSecureStorage.getFullname().then((value) =>
+        setState(() {
+          controllerName.text = value!;
+        })
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme
           .of(context)
           .backgroundColor,
+      endDrawer: SettingPage(
+        onSignOut: widget.onSignOut,
+      ),
       appBar: AppBar(
-        title: const Text('Chętny do pomocy'),
-        actions: [EasyDynamicThemeSwitch(), TextButton(onPressed: () {
-          Navigator.pop(context);
-          AuthService().signOut();
-          widget.onSignOut();
-        }, child: Text('logout'),)
+        actions: [
+          Builder(
+              builder: (context) => IconButton(
+                  onPressed: () {
+                    Scaffold.of(context).openEndDrawer();
+                  },
+                  icon: Icon(Icons.settings)))
         ],
       ),
       body: Center(

@@ -1,5 +1,0 @@
-
-class SesionData {
-//static data
-
-}

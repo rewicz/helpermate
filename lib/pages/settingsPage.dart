@@ -1,7 +1,7 @@
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:helpermate/components/componentsUI.dart';
-import 'package:helpermate/services/authService.dart';
+import 'package:helpermate/firebase/services/authService.dart';
 
 class SettingPage extends StatefulWidget {
   final Function onSignOut;

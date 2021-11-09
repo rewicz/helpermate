@@ -1,4 +1,4 @@
-class User {
+class UserEntity {
   String fullName;
   String email;
   String telephone;
@@ -6,11 +6,9 @@ class User {
   String address;
   double rate;
   int amountOdRates;
-  int localization;
 
-  User({
+  UserEntity({
     required this.fullName,
-    required this.localization,
     required this.rate,
     required this.amountOdRates,
     required this.email,

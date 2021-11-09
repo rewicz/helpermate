@@ -13,54 +13,51 @@ class OfferedHelpHelperPanel extends StatefulWidget {
 }
 
 class _OfferedHelpHelperPanelState extends State<OfferedHelpHelperPanel> {
-  static Helper me = Helper(
-      email: 'email@email.com',
-      address: 'Glwice Soltysowa 10',
-      fullName: 'Adaam Fertes',
-      telephone: '123654321',
-      dateOfBirth: DateTime(2001),
-      password: 'dsa',
-      ID: 1, range: 20);
-  static Needer him = Needer(
-      email: 'email@email.com',
-      address: 'Glwice Soltysowa 10',
-      fullName: 'Adaam Fertes',
-      telephone: '123654321',
-      dateOfBirth: DateTime(2001),
-      password: 'dsa',
-      ID: 1);
+  // static Helper me = Helper(
+  //     email: 'email@email.com',
+  //     address: 'Glwice Soltysowa 10',
+  //     fullName: 'Adaam Fertes',
+  //     telephone: '123654321',
+  //     dateOfBirth: DateTime(2001),
+  //     range: 20);
+  // static Needer him = Needer(
+  //     email: 'email@email.com',
+  //     address: 'Glwice Soltysowa 10',
+  //     fullName: 'Adaam Fertes',
+  //     telephone: '123654321',
+  //     dateOfBirth: DateTime(2001));
 
   List<HelpObject> helpingList = <HelpObject>[
-    HelpObject(
-        helper: me,
-        helpingTime: DateTime(2020),
-        helpType: HelpType.another,
-        needer: him),
-    HelpObject(
-        helper: me,
-        helpingTime: DateTime(2020),
-        helpType: HelpType.computer,
-        needer: him),
-    HelpObject(
-        helper: me,
-        helpingTime: DateTime(2020),
-        helpType: HelpType.another,
-        needer: him),
-    HelpObject(
-        helper: me,
-        helpingTime: DateTime(2020),
-        helpType: HelpType.walk_dog,
-        needer: him),
-    HelpObject(
-        helper: me,
-        helpingTime: DateTime(2020),
-        helpType: HelpType.another,
-        needer: him),
-    HelpObject(
-        helper: me,
-        helpingTime: DateTime(2020),
-        helpType: HelpType.shopping,
-        needer: him),
+    // HelpObject(
+    //     helper: me,
+    //     helpingTime: DateTime(2020),
+    //     helpType: HelpType.another,
+    //     needer: him),
+    // HelpObject(
+    //     helper: me,
+    //     helpingTime: DateTime(2020),
+    //     helpType: HelpType.computer,
+    //     needer: him),
+    // HelpObject(
+    //     helper: me,
+    //     helpingTime: DateTime(2020),
+    //     helpType: HelpType.another,
+    //     needer: him),
+    // HelpObject(
+    //     helper: me,
+    //     helpingTime: DateTime(2020),
+    //     helpType: HelpType.walk_dog,
+    //     needer: him),
+    // HelpObject(
+    //     helper: me,
+    //     helpingTime: DateTime(2020),
+    //     helpType: HelpType.another,
+    //     needer: him),
+    // HelpObject(
+    //     helper: me,
+    //     helpingTime: DateTime(2020),
+    //     helpType: HelpType.shopping,
+    //     needer: him),
   ];
 
   late List<HelpObject> filterList = helpingList;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:location/location.dart';
 
 import 'componentsUI.dart';
 
@@ -7,7 +6,7 @@ class Geolocalizator extends StatefulWidget {
   bool isLocated;
   bool editMode;
 
-  Location location = new Location();
+  //Location location = new Location();
 
   Geolocalizator({
     required this.isLocated,

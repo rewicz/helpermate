@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:helpermate/components/componentsUI.dart';
 import 'package:helpermate/pages/signUp.dart';
-import 'package:helpermate/services/authService.dart';
+import 'package:helpermate/firebase/services/authService.dart';
 
 class Login extends StatefulWidget {
   final Function(User?) onSignIn;
@@ -19,6 +19,11 @@ class _LoginState extends State<Login> {
   late String email = "";
   late String password = "";
 
+
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +63,7 @@ class _LoginState extends State<Login> {
                 labelText: '',
               ),
               RoitButton(
-                onPressedCallback: () {
+                onPressedCallback: () async {
                   AuthService().signInEmail(email, password).then((value) {
                     widget.onSignIn(value);
                   });

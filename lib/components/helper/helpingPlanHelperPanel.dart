@@ -15,13 +15,13 @@ class HelpingPlanHelperPanel extends StatefulWidget {
 
 class _HelpingPlanHelperPanelState extends State<HelpingPlanHelperPanel> {
 
-  static Helper me = Helper(email: 'email@email.com', address: 'Glwice Soltysowa 10', fullName: 'Adaam Fertes', telephone: '123654321', dateOfBirth: DateTime(2001), password: 'dsa', ID: 2, range: 2);
-  static Needer him = Needer(email: 'email@email.com', address: 'Glwice Soltysowa 10', fullName: 'Adaam Fertes', telephone: '123654321', dateOfBirth: DateTime(2001), password: 'dsa', ID: 2);
+  //static Helper me = Helper(email: 'email@email.com', address: 'Glwice Soltysowa 10', fullName: 'Adaam Fertes', telephone: '123654321', dateOfBirth: DateTime(2001),  range: 2);
+  //static Needer him = Needer(email: 'email@email.com', address: 'Glwice Soltysowa 10', fullName: 'Adaam Fertes', telephone: '123654321', dateOfBirth: DateTime(2001), );
 
 
   List<HelpObject> helpingList = <HelpObject> [
-  HelpObject(helper: me, helpingTime: DateTime(2020), helpType: HelpType.another, needer: him),
-  HelpObject(helper: me, helpingTime: DateTime(2020), helpType: HelpType.cleaning, needer: him),
+  //HelpObject(helper: me, helpingTime: DateTime(2020), helpType: HelpType.another, needer: him),
+  //HelpObject(helper: me, helpingTime: DateTime(2020), helpType: HelpType.cleaning, needer: him),
   ];
 
   @override

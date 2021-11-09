@@ -1,18 +1,14 @@
-class User {
+class HelperEntity {
   String fullName;
   String email;
   String telephone;
   DateTime dateOfBirth;
   String address;
-  double rate;
-  int amountOdRates;
-  int localization;
+  int range;
 
-  User({
+  HelperEntity({
     required this.fullName,
-    required this.localization,
-    required this.rate,
-    required this.amountOdRates,
+    required this.range,
     required this.email,
     required this.telephone,
     required this.dateOfBirth,

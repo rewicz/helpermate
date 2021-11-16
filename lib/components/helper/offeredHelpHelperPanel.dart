@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:helpermate/data/helpObjectInput.dart';
+import 'package:helpermate/data/helpObjectOutputHelper.dart';
 import 'package:helpermate/data/helpTypes.dart';
 import 'package:helpermate/data/helper.dart';
-import 'package:helpermate/data/helpObject.dart';
+import 'package:helpermate/components/entities/helpObjectEntity.dart';
 import 'package:helpermate/data/needer.dart';
 
 import '../componentsUI.dart';
@@ -27,40 +29,9 @@ class _OfferedHelpHelperPanelState extends State<OfferedHelpHelperPanel> {
   //     telephone: '123654321',
   //     dateOfBirth: DateTime(2001));
 
-  List<HelpObject> helpingList = <HelpObject>[
-    // HelpObject(
-    //     helper: me,
-    //     helpingTime: DateTime(2020),
-    //     helpType: HelpType.another,
-    //     needer: him),
-    // HelpObject(
-    //     helper: me,
-    //     helpingTime: DateTime(2020),
-    //     helpType: HelpType.computer,
-    //     needer: him),
-    // HelpObject(
-    //     helper: me,
-    //     helpingTime: DateTime(2020),
-    //     helpType: HelpType.another,
-    //     needer: him),
-    // HelpObject(
-    //     helper: me,
-    //     helpingTime: DateTime(2020),
-    //     helpType: HelpType.walk_dog,
-    //     needer: him),
-    // HelpObject(
-    //     helper: me,
-    //     helpingTime: DateTime(2020),
-    //     helpType: HelpType.another,
-    //     needer: him),
-    // HelpObject(
-    //     helper: me,
-    //     helpingTime: DateTime(2020),
-    //     helpType: HelpType.shopping,
-    //     needer: him),
-  ];
+  List<HelpObjectOutputHelper> helpingList = [];
 
-  late List<HelpObject> filterList = helpingList;
+  late List<HelpObjectOutputHelper> filterList = helpingList;
 
   late String filterNameNeeder = 'All';
   late String filterHelpingKindNeeder = 'All';
@@ -158,7 +129,7 @@ class _OfferedHelpHelperPanelState extends State<OfferedHelpHelperPanel> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(helpingList[index].helpingTime.toString().substring(0, 11)),
-                      Text(helpingList[index].needer.fullName),
+                      Text(helpingList[index].needer.toString()),
                       Text('1,6km'),
 
                     ],

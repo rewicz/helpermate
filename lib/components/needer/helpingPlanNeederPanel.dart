@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:helpermate/data/helpObjectInput.dart';
 import 'package:helpermate/data/helpTypes.dart';
 import 'package:helpermate/data/helper.dart';
-import 'package:helpermate/data/helpObject.dart';
+import 'package:helpermate/components/entities/helpObjectEntity.dart';
 import 'package:helpermate/data/needer.dart';
 
 import '../archiveHelpingPlan.dart';
@@ -20,7 +21,7 @@ class _HelpingPlanNeederPanelState extends State<HelpingPlanNeederPanel> {
   //static Needer him = Needer(email: 'email@email.com', address: 'Glwice Soltysowa 10', fullName: 'Adaam Fertes', telephone: '123654321', dateOfBirth: DateTime(2001), );
 
 
-  List<HelpObject> helpingList = <HelpObject> [
+  List<HelpObjectInput> helpingList = <HelpObjectInput> [
     //HelpObject(helper: me, helpingTime: DateTime(2020), helpType: HelpType.rubbish, needer: him),
     //HelpObject(helper: me, helpingTime: DateTime(2020), helpType: HelpType.walk, needer: him),
   ];

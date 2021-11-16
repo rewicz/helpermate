@@ -33,8 +33,8 @@ class TextInputBox extends StatelessWidget {
   final controllerName = TextEditingController();
 
 
-  String? Function(String?)? validatorMethod;
-  GestureTapCallback? onTap;
+  final String? Function(String?)? validatorMethod;
+  final GestureTapCallback? onTap;
 
   TextInputBox({this.labelText: "",
     this.readonly: false,

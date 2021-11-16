@@ -1,6 +1,6 @@
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:helpermate/models/userState.dart';
+import 'package:helpermate/data/userState.dart';
 
 class UserSecureStorage {
   static final _storage = FlutterSecureStorage();

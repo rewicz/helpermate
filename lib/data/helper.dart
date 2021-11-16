@@ -1,20 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:helpermate/data/user.dart';
 
-class Helper extends User {
+class Helper extends UserHelper {
+
   Helper(
       {required String email,
       required String telephone,
       required DateTime dateOfBirth,
       required String address,
-      required int localization,
+      required GeoPoint? localization,
       required String fullName,
       required int amountOdRates,
       required double rate})
       : super(
             fullName: fullName,
             rate: rate,
-            amountOdRates: amountOdRates,
             localization: localization,
+            amountOdRates: amountOdRates,
             email: email,
             telephone: telephone,
             dateOfBirth: dateOfBirth,

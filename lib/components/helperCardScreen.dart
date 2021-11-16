@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:helpermate/data/helpObject.dart';
+import 'package:helpermate/components/entities/helpObjectEntity.dart';
+import 'package:helpermate/data/helpObjectInput.dart';
 
 import 'componentsUI.dart';
 
 
 class HelperCardScreen extends StatefulWidget {
-  HelpObject helpObject;
+  HelpObjectInput helpObject;
   bool vote = false;
   bool isEnd = false;
   bool isAccept = true;

@@ -1,4 +1,6 @@
-class User {
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class UserHelper {
   String fullName;
   String email;
   String telephone;
@@ -6,17 +8,18 @@ class User {
   String address;
   double rate;
   int amountOdRates;
-  int localization;
+  GeoPoint? localization;
 
-  User({
+
+  UserHelper({
     required this.fullName,
-    required this.localization,
     required this.rate,
     required this.amountOdRates,
     required this.email,
     required this.telephone,
     required this.dateOfBirth,
-    required this.address
+    required this.localization,
+    required this.address,
   });
 
 }

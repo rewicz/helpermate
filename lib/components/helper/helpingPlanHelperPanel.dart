@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:helpermate/components/archiveHelpingPlan.dart';
+import 'package:helpermate/data/helpObjectInput.dart';
+import 'package:helpermate/data/helpObjectOutputHelper.dart';
 import 'package:helpermate/data/helpTypes.dart';
-import 'package:helpermate/data/helper.dart';
-import 'package:helpermate/data/helpObject.dart';
-import 'package:helpermate/data/needer.dart';
+import 'package:helpermate/firebase/services/firebaseService.dart';
 import '../neederCardScreen.dart';
 
 class HelpingPlanHelperPanel extends StatefulWidget {
@@ -17,18 +17,30 @@ class _HelpingPlanHelperPanelState extends State<HelpingPlanHelperPanel> {
 
   //static Helper me = Helper(email: 'email@email.com', address: 'Glwice Soltysowa 10', fullName: 'Adaam Fertes', telephone: '123654321', dateOfBirth: DateTime(2001),  range: 2);
   //static Needer him = Needer(email: 'email@email.com', address: 'Glwice Soltysowa 10', fullName: 'Adaam Fertes', telephone: '123654321', dateOfBirth: DateTime(2001), );
+  bool loading = true;
 
+  @override
+  void initState() {
 
-  List<HelpObject> helpingList = <HelpObject> [
-  //HelpObject(helper: me, helpingTime: DateTime(2020), helpType: HelpType.another, needer: him),
-  //HelpObject(helper: me, helpingTime: DateTime(2020), helpType: HelpType.cleaning, needer: him),
-  ];
+    super.initState();
+    _getHelpingList();
+  }
+  _getHelpingList() async {
+    await FirebaseService().readHelpObjectHelper().then((value) =>  setState(() {
+      helpingList = value!;
+      loading = false;
+    }));
+  }
+
+  List<HelpObjectOutputHelper> helpingList = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      body: ListView.builder(
+      body: loading
+          ? CircularProgressIndicator()
+          : ListView.builder(
           itemCount: helpingList.length,
             itemBuilder: (context, index){
               return Card(
@@ -46,7 +58,7 @@ class _HelpingPlanHelperPanelState extends State<HelpingPlanHelperPanel> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(helpingList[index].helpingTime.toString().substring(0, 11)),
-                      Text(helpingList[index].needer.fullName)
+                      Text(helpingList[index].distance.toString() + ' (km)')
                     ],
                   )
 

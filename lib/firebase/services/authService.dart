@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:helpermate/firebase/services/firebaseService.dart';
 import 'package:helpermate/firebase/services/imageCloudService.dart';
 import 'package:helpermate/firebase/services/userSecureStorage.dart';
-import 'package:helpermate/models/userState.dart';
+import 'package:helpermate/data/userState.dart';
 
 class AuthService {
   //todo refactor na controler
@@ -28,9 +28,7 @@ class AuthService {
       // bo nie wypełnione dane
       UserSecureStorage.setUserState(UserState.ERROR);
       // save dane
-      FirebaseService().createUserData();
-
-      ImageCloudService().uploadUserPhoto(File('assets/helpTypes/cleaning.jpg'));
+      FirebaseService().createUserData(email, userCredential.user!.uid);
 
       return userCredential.user;
       //todo elsy

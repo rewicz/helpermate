@@ -1,7 +1,10 @@
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:helpermate/components/componentsUI.dart';
+import 'package:helpermate/data/helpObjectCreate.dart';
 import 'package:helpermate/data/helpTypes.dart';
+import 'package:helpermate/firebase/services/firebaseService.dart';
+import 'package:helpermate/firebase/services/localizationService.dart';
 
 class CreateHelp extends StatefulWidget {
   const CreateHelp({Key? key}) : super(key: key);
@@ -11,13 +14,46 @@ class CreateHelp extends StatefulWidget {
 }
 
 class _CreateHelpState extends State<CreateHelp> {
-  String type = '';
-  String hour = '';
+
+  late HelpObjectCreate helpObjectCreate = new HelpObjectCreate();
+
+  @override
+  void initState() {
+    helpObjectCreate.helpType = HelpType.rubbish;
+    helpObjectCreate.message = '';
+    super.initState();
+  }
+
+  bool _createHelp() {
+    //todo sprawdzenie
+    FirebaseService().createHelpObject(helpObjectCreate);
+    return true;
+  }
+
+  bool _checkHelp() {
+    List<String> errors = [];
+    if (helpObjectCreate.helpingTime == null) {
+      errors.add('Wypełnij datę pomocy!');
+    }
+    if (helpObjectCreate.localization == null) {
+      errors.add('Zaaktualizuj lokalizacje');
+    }
+    if (errors.isNotEmpty) {
+      //todo toast
+      print(errors);
+
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme
+            .of(context)
+            .backgroundColor,
         appBar: AppBar(
           actions: [EasyDynamicThemeSwitch()],
         ),
@@ -27,7 +63,9 @@ class _CreateHelpState extends State<CreateHelp> {
             children: [
               Text('Wybierz rodzaj pomocy jaką chcesz uzyskać'),
               _createHelpTypers(),
-              DataPickerBox(text: 'Podaj date', callback: (value) {}),
+              DataPickerBox(text: 'Podaj date', callback: (value) {
+                helpObjectCreate.helpingTime = value;
+              }),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -36,24 +74,55 @@ class _CreateHelpState extends State<CreateHelp> {
                     items: List.generate(24, (index) => '$index:00'),
                     initValue: '10:00',
                     callback: (String value) {
-                      hour = value;
+                      helpObjectCreate.helpingHour = value;
                     },
                   ),
                 ],
               ),
               TextInputBox(
+                labelText: helpObjectCreate.message,
                   icon: Icon(Icons.comment),
-                  callback: (value) {},
+                  callback: (value) {
+                    helpObjectCreate.message = value;
+                  },
                   text: "Dodatkowy komentarz"),
               SizedBox(height: 20.0,),
               Row(
+                children: [
+                  Expanded(
+                    child: helpObjectCreate.localization != null
+                        ? Text('Lokalizacja jest pobrana')
+                        : Text('Zaaktualizuj lokalizacje'),
+                  ),
+                  RoitButton(
+                    text: 'Pobierz',
+                    onPressedCallback: () async {
+                      await LocalizationService().getCurrentPosition().then((
+                          value) {
+                        if (value != null) {
+                          helpObjectCreate.localization = value;
+                        }
+                      });
+                    },
+                  ),
+                ],
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  RoitButton(text: 'Zapisz', onPressedCallback: () {}),
+                  RoitButton(text: 'Zapisz', onPressedCallback: () {
+                    if (_checkHelp() && _createHelp()) {
+                      Navigator.of(context).pop();
+                    } else {
+                      Navigator.of(context).pop();
+                    }
+                  }),
                   RoitButton(
                       text: 'Anuluj',
                       onPressedCallback: () {
-                        Navigator.of(context).pop();
+
+                          Navigator.of(context).pop();
+
                       }),
                 ],
               ),
@@ -65,7 +134,10 @@ class _CreateHelpState extends State<CreateHelp> {
   Widget _createHelpTypers() {
     return Container(
       padding: EdgeInsets.all(20),
-      height: MediaQuery.of(context).size.width,
+      height: MediaQuery
+          .of(context)
+          .size
+          .width,
       child: GridView.count(
         crossAxisCount: 3,
         crossAxisSpacing: 30.0,
@@ -73,90 +145,106 @@ class _CreateHelpState extends State<CreateHelp> {
         children: [
           ImageButton(
             path: HelpType.cleaning.getPath,
-            checked: type == HelpType.cleaning.name ? true : false,
+            checked: helpObjectCreate.helpType == HelpType.cleaning
+                ? true
+                : false,
             onTap: () {
               setState(() {
-                type = HelpType.cleaning.name;
+                helpObjectCreate.helpType = HelpType.cleaning;
               });
             },
             description: HelpType.cleaning.getDescribe,
           ),
           ImageButton(
             path: HelpType.compan.getPath,
-            checked: type == HelpType.compan.name ? true : false,
+            checked: helpObjectCreate.helpType == HelpType.compan
+                ? true
+                : false,
             onTap: () {
               setState(() {
-                type = HelpType.compan.name;
+                helpObjectCreate.helpType = HelpType.compan;
               });
             },
             description: HelpType.compan.getDescribe,
           ),
           ImageButton(
             path: HelpType.computer.getPath,
-            checked: type == HelpType.computer.name ? true : false,
+            checked: helpObjectCreate.helpType == HelpType.computer
+                ? true
+                : false,
             onTap: () {
               setState(() {
-                type = HelpType.computer.name;
+                helpObjectCreate.helpType = HelpType.computer;
               });
             },
             description: HelpType.computer.getDescribe,
           ),
           ImageButton(
             path: HelpType.grass_cut.getPath,
-            checked: type == HelpType.grass_cut.name ? true : false,
+            checked: helpObjectCreate.helpType == HelpType.grass_cut
+                ? true
+                : false,
             onTap: () {
               setState(() {
-                type = HelpType.grass_cut.name;
+                helpObjectCreate.helpType = HelpType.grass_cut;
               });
             },
             description: HelpType.grass_cut.getDescribe,
           ),
           ImageButton(
             path: HelpType.rubbish.getPath,
-            checked: type == HelpType.rubbish.name ? true : false,
+            checked: helpObjectCreate.helpType == HelpType.rubbish
+                ? true
+                : false,
             onTap: () {
               setState(() {
-                type = HelpType.rubbish.name;
+                helpObjectCreate.helpType = HelpType.rubbish;
               });
             },
             description: HelpType.rubbish.getDescribe,
           ),
           ImageButton(
             path: HelpType.shopping.getPath,
-            checked: type == HelpType.shopping.name ? true : false,
+            checked: helpObjectCreate.helpType == HelpType.shopping
+                ? true
+                : false,
             onTap: () {
               setState(() {
-                type = HelpType.shopping.name;
+                helpObjectCreate.helpType = HelpType.shopping;
               });
             },
             description: HelpType.shopping.getDescribe,
           ),
           ImageButton(
             path: HelpType.walk.getPath,
-            checked: type == HelpType.walk.name ? true : false,
+            checked: helpObjectCreate.helpType == HelpType.walk ? true : false,
             onTap: () {
               setState(() {
-                type = HelpType.walk.name;
+                helpObjectCreate.helpType = HelpType.walk;
               });
             },
             description: HelpType.walk.getDescribe,
           ),
           ImageButton(
             path: HelpType.walk_dog.getPath,
-            checked: type == HelpType.walk_dog.name ? true : false,
+            checked: helpObjectCreate.helpType == HelpType.walk_dog
+                ? true
+                : false,
             onTap: () {
               setState(() {
-                type = HelpType.walk_dog.name;
+                helpObjectCreate.helpType = HelpType.walk_dog;
               });
             },
             description: HelpType.walk_dog.getDescribe,
           ),
           ImageButton(
             path: HelpType.another.getPath,
-            checked: type == HelpType.another.name ? true : false,
+            checked: helpObjectCreate.helpType == HelpType.another
+                ? true
+                : false,
             onTap: () {
               setState(() {
-                type = HelpType.another.name;
+                helpObjectCreate.helpType = HelpType.another;
               });
             },
             description: HelpType.another.getDescribe,
@@ -194,12 +282,18 @@ class _ImageButtonState extends State<ImageButton> {
             onTap: widget.onTap,
             child: Container(
               decoration: BoxDecoration(
-                  color: Theme.of(context).brightness != Brightness.dark
+                  color: Theme
+                      .of(context)
+                      .brightness != Brightness.dark
                       ? Colors.white
-                      : Theme.of(context).backgroundColor,
+                      : Theme
+                      .of(context)
+                      .backgroundColor,
                   border: Border.all(
                       color: widget.checked
-                          ? Theme.of(context).buttonColor
+                          ? Theme
+                          .of(context)
+                          .buttonColor
                           : Colors.white,
                       width: 4),
                   shape: BoxShape.circle,

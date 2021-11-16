@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserEntity {
   String fullName;
   String email;
@@ -6,9 +8,11 @@ class UserEntity {
   String address;
   double rate;
   int amountOdRates;
+  GeoPoint? localization;
 
   UserEntity({
     required this.fullName,
+    required this.localization,
     required this.rate,
     required this.amountOdRates,
     required this.email,

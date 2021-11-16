@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:helpermate/data/helpObject.dart';
+import 'package:helpermate/components/entities/helpObjectEntity.dart';
+import 'package:helpermate/data/helpObjectInput.dart';
+import 'package:helpermate/data/helpObjectOutputHelper.dart';
 
 import 'componentsUI.dart';
 
 class NeederCardScreen extends StatefulWidget {
-  HelpObject helpObject;
+  HelpObjectOutputHelper helpObject;
   bool vote = false;
   bool isEnd = false;
   bool isAccept = true;
 
   NeederCardScreen({required this.helpObject});
 
+
+
   @override
   _NeederCardScreenState createState() => _NeederCardScreenState();
 }
 
 class _NeederCardScreenState extends State<NeederCardScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    //_getNeederD
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +61,7 @@ class _NeederCardScreenState extends State<NeederCardScreen> {
           ),
           Center(
             child: Text(
-              widget.helpObject.needer.fullName,
+              'error',
               style: TextStyle(
                 fontSize: 20.0,
               ),
@@ -96,7 +107,7 @@ class _NeederCardScreenState extends State<NeederCardScreen> {
                   ),
                 ),
                 Text(
-                  widget.helpObject.needer.address,
+                  'error',
                   style: TextStyle(
                     fontSize: 20.0,
                   ),

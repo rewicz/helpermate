@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:helpermate/components/RoitButton.dart';
+import 'package:helpermate/components/roitButton.dart';
 import 'package:helpermate/components/rating.dart';
 import 'package:helpermate/components/textInputBox.dart';
 import 'package:helpermate/models/helper.dart';

@@ -1,10 +1,8 @@
-import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:helpermate/components/helper/helpingPlanHelperPanel.dart';
-import 'package:helpermate/components/helper/offeredHelpHelperPanel.dart';
-import 'package:helpermate/components/helper/profileHelperPanel.dart';
-import 'package:helpermate/firebase/services/authService.dart';
-import 'package:helpermate/firebase/services/userSecureStorage.dart';
+import 'package:helpermate/pages/helper/helpingPlanHelperPanel.dart';
+import 'package:helpermate/pages/helper/offeredHelpHelperPanel.dart';
+import 'package:helpermate/pages/helper/profileHelperPanel.dart';
+import 'package:helpermate/services/userSecureStorage.dart';
 import 'package:helpermate/pages/settingsPage.dart';
 
 class HelperPanel extends StatefulWidget {
@@ -62,6 +60,7 @@ class HelperPanelState extends State<HelperPanel> {
         onSignOut: widget.onSignOut,
       ),
       appBar: AppBar(
+        title: Text('Witaj: ' + controllerName.text),
         actions: [
           Builder(
               builder: (context) => IconButton(

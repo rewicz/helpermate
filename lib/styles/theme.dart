@@ -6,8 +6,7 @@ var lightThemeData = new ThemeData(
     primaryColor: Colors.blue,
     //textTheme: new TextTheme(button: TextStyle(color: Colors.white70)),
     brightness: Brightness.light,
-    accentColor: Colors.white
-);
+    accentColor: Colors.white);
 
 var contrastThemeData = ThemeData(
     backgroundColor: Colors.black,

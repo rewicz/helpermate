@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:helpermate/styles/theme.dart';
 
-import 'decisionTree.dart';
+import 'pages/decisionTree.dart';
 
 
 Future<void> main() async {

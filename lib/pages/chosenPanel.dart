@@ -1,5 +1,6 @@
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:helpermate/components/RoitButton.dart';
 import 'package:helpermate/pages/helperPanel.dart';
 import 'package:helpermate/pages/neederPanel.dart';
 
@@ -16,8 +17,10 @@ class _ChosenPanelState extends State<ChosenPanel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
-        actions: [EasyDynamicThemeSwitch()],
+        actions: [EasyDynamicThemeSwitch()
+        ],
       ),
       body: Container(
         color: Theme.of(context).backgroundColor,
@@ -27,45 +30,19 @@ class _ChosenPanelState extends State<ChosenPanel> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              width: 400.0,
-              height: 200.0,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: Theme.of(context).buttonColor,
-                  ),
-                  onPressed: () => {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (_) => HelperPanel(onSignOut: widget.onSignOut)))
-                  },
-                  child: Text(
-                    "Chętny do pomocy",
-                    style: TextStyle(color: Theme.of(context).accentColor),
-                  ),
-                ),
-              ),
+            RoitBigButton(
+              text: 'Wolontariusz',
+              onPressedCallback: () => {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => HelperPanel(onSignOut: widget.onSignOut)))
+              },
             ),
-            Container(
-              width: 400.0,
-              height: 200.0,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: Theme.of(context).buttonColor,
-                  ),
-                  onPressed: () => {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (_) => NeederPanel(onSignOut: widget.onSignOut,)))
-                  },
-                  child: Text(
-                    "Potrzebujący",
-                    style: TextStyle(color: Theme.of(context).accentColor),
-                  ),
-                ),
-              ),
+            RoitBigButton(
+              text: 'Potrzebujący pomocy',
+              onPressedCallback: () => {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => NeederPanel(onSignOut: widget.onSignOut)))
+              },
             ),
           ],
         ),

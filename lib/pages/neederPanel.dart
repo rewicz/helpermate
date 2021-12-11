@@ -1,8 +1,9 @@
-import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:helpermate/components/needer/helpingPlanNeederPanel.dart';
-import 'package:helpermate/components/needer/needHelpNeederPanel.dart';
-import 'package:helpermate/components/needer/profileNeederPanel.dart';
+import 'package:helpermate/pages/needer/helpingPlanNeederPanel.dart';
+import 'package:helpermate/pages/needer/needHelpNeederPanel.dart';
+import 'package:helpermate/pages/needer/profileNeederPanel.dart';
+import 'package:helpermate/services/userSecureStorage.dart';
+import 'package:helpermate/pages/settingsPage.dart';
 
 class NeederPanel extends StatefulWidget {
   final Function onSignOut;
@@ -16,6 +17,8 @@ class NeederPanel extends StatefulWidget {
 
 class _NeederPanelState extends State<NeederPanel> {
   int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
     HelpingPlanNeederPanel(),
     NeedHelpNeederPanel(),
@@ -28,13 +31,41 @@ class _NeederPanelState extends State<NeederPanel> {
     });
   }
 
+  final controllerName = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  Future init() async {
+    await UserSecureStorage.getFullname().then((value) =>
+        setState(() {
+          controllerName.text = value!;
+        })
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme
+          .of(context)
+          .backgroundColor,
+      endDrawer: SettingPage(
+        onSignOut: widget.onSignOut,
+      ),
       appBar: AppBar(
-        title: const Text('Helper'),
-        actions: [EasyDynamicThemeSwitch()],
+        title: Text('Witaj: ' + controllerName.text),
+        actions: [
+          Builder(
+              builder: (context) => IconButton(
+                  onPressed: () {
+                    Scaffold.of(context).openEndDrawer();
+                  },
+                  icon: Icon(Icons.settings)))
+        ],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -58,7 +89,6 @@ class _NeederPanelState extends State<NeederPanel> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[100],
         onTap: _onItemTapped,
       ),
     );
